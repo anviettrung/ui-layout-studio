@@ -1,0 +1,18 @@
+{
+    "name": "AnVietTrung.UILayoutStudio.Editor",
+    "rootNamespace": "UILayoutStudio.EditorTools",
+    "references": [
+        "AnVietTrung.UILayoutStudio",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
