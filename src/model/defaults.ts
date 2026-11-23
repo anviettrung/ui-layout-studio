@@ -1,4 +1,4 @@
-import type { CanvasSettings, DeviceProfile, ImageData, LayoutDocument, LayoutNode, NodeType, RectTransformData, TextData } from './types'
+import type { CanvasSettings, DeviceProfile, ImageData, LayoutDocument, LayoutElementData, LayoutGroupData, LayoutNode, NodeType, RectTransformData, TextData } from './types'
 import { FORMAT_ID, FORMAT_VERSION } from './types'
 
 /** Cấu hình mặc định lấy theo dự án MSO (UIRoot.prefab): 1080x1920, Expand. */
@@ -85,4 +85,64 @@ export function createDocument(name = 'NewScreen'): LayoutDocument {
   const safe = createNode('SafeArea', 'SafeArea')
   root.children.push(safe)
   return { format: FORMAT_ID, version: FORMAT_VERSION, name, canvas: { ...DEFAULT_CANVAS }, sprites: [], root }
+}
+
+export function defaultLayoutGroup(type: LayoutGroupData['type']): LayoutGroupData {
+  return {
+    type,
+    padding: { left: 0, right: 0, top: 0, bottom: 0 },
+    childAlignment: 'UpperLeft',
+    spacing: 0,
+    reverseArrangement: false,
+    childControlWidth: false,
+    childControlHeight: false,
+    childScaleWidth: false,
+    childScaleHeight: false,
+    childForceExpandWidth: true,
+    childForceExpandHeight: true,
+    cellSize: { x: 100, y: 100 },
+    gridSpacing: { x: 0, y: 0 },
+    startCorner: 'UpperLeft',
+    startAxis: 'Horizontal',
+    constraint: 'Flexible',
+    constraintCount: 2,
+  }
+}
+
+export function defaultLayoutElement(): LayoutElementData {
+  return { ignoreLayout: false, minWidth: -1, minHeight: -1, preferredWidth: -1, preferredHeight: -1, flexibleWidth: -1, flexibleHeight: -1, layoutPriority: 1 }
+}
+
+/** Điền mặc định (như Unity) cho các trường tuỳ chọn bị thiếu trong tệp. Trả về chính node nếu không cần sửa. */
+export function normalizeNode(n: LayoutNode): LayoutNode {
+  let out = n
+  const patch = (p: Partial<LayoutNode>) => {
+    out = { ...out, ...p }
+  }
+  if (n.layoutGroup) {
+    const d = defaultLayoutGroup(n.layoutGroup.type ?? 'Horizontal')
+    patch({
+      layoutGroup: {
+        ...d,
+        ...n.layoutGroup,
+        padding: { ...d.padding, ...n.layoutGroup.padding },
+        cellSize: { ...d.cellSize, ...n.layoutGroup.cellSize },
+        gridSpacing: { ...d.gridSpacing, ...n.layoutGroup.gridSpacing },
+      },
+    })
+  }
+  if (n.layoutElement) patch({ layoutElement: { ...defaultLayoutElement(), ...n.layoutElement } })
+  if (n.contentSizeFitter) {
+    const f: Partial<NonNullable<LayoutNode['contentSizeFitter']>> = n.contentSizeFitter
+    patch({ contentSizeFitter: { horizontalFit: f.horizontalFit ?? 'Unconstrained', verticalFit: f.verticalFit ?? 'Unconstrained' } })
+  }
+  if (n.mask) {
+    const m: Partial<NonNullable<LayoutNode['mask']>> = n.mask
+    patch({ mask: { type: m.type ?? 'Mask', showMaskGraphic: m.showMaskGraphic ?? true } })
+  }
+  if (n.image) patch({ image: { ...defaultImage(), ...n.image } })
+  if (n.text) patch({ text: { ...defaultText(), ...n.text } })
+  const children = n.children.map(normalizeNode)
+  if (children.some((c, i) => c !== n.children[i])) patch({ children })
+  return out
 }

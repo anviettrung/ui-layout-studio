@@ -116,6 +116,55 @@ namespace UILayoutStudio.EditorTools
         public string type = "Simple";
         public bool preserveAspect;
         public bool raycastTarget = true;
+        // type = "Filled"
+        public string fillMethod = "Radial360";
+        public int fillOrigin;
+        public float fillAmount = 1;
+        public bool fillClockwise = true;
+    }
+
+    /// <summary>layoutGroup: HorizontalLayoutGroup / VerticalLayoutGroup / GridLayoutGroup. Mặc định như Unity.</summary>
+    public sealed class LayoutGroupData
+    {
+        public const string Horizontal = "Horizontal", Vertical = "Vertical", Grid = "Grid";
+
+        public string type = Horizontal;
+        public int paddingLeft, paddingRight, paddingTop, paddingBottom;
+        public string childAlignment = "UpperLeft";
+        // Horizontal / Vertical
+        public float spacing;
+        public bool reverseArrangement;
+        public bool childControlWidth, childControlHeight;
+        public bool childScaleWidth, childScaleHeight;
+        public bool childForceExpandWidth = true, childForceExpandHeight = true;
+        // Grid
+        public Vector2 cellSize = new Vector2(100, 100);
+        public Vector2 gridSpacing = Vector2.zero;
+        public string startCorner = "UpperLeft";
+        public string startAxis = "Horizontal";
+        public string constraint = "Flexible";
+        public int constraintCount = 2;
+    }
+
+    /// <summary>layoutElement: LayoutElement. -1 = không đặt.</summary>
+    public sealed class LayoutElementData
+    {
+        public bool ignoreLayout;
+        public float minWidth = -1, minHeight = -1, preferredWidth = -1, preferredHeight = -1, flexibleWidth = -1, flexibleHeight = -1;
+        public int layoutPriority = 1;
+    }
+
+    public sealed class ContentSizeFitterData
+    {
+        public string horizontalFit = "Unconstrained";
+        public string verticalFit = "Unconstrained";
+    }
+
+    public sealed class MaskData
+    {
+        public const string TypeMask = "Mask", TypeRectMask2D = "RectMask2D";
+        public string type = TypeMask;
+        public bool showMaskGraphic = true;
     }
 
     public sealed class LayoutText
@@ -134,6 +183,8 @@ namespace UILayoutStudio.EditorTools
         public float fontSizeMax = 72;
         public float lineSpacing;
         public float characterSpacing;
+        /// <summary>TMP_Text.margin: x = left, y = top, z = right, w = bottom.</summary>
+        public Vector4 margin;
     }
 
     public sealed class LayoutNodeData
@@ -147,6 +198,10 @@ namespace UILayoutStudio.EditorTools
         public LayoutRect rect = new LayoutRect();
         public LayoutImage image;
         public LayoutText text;
+        public LayoutGroupData layoutGroup;
+        public LayoutElementData layoutElement;
+        public ContentSizeFitterData contentSizeFitter;
+        public MaskData mask;
         public List<LayoutNodeData> children = new List<LayoutNodeData>();
 
         internal static LayoutNodeData Parse(Dictionary<string, object> o, int depth)
@@ -189,6 +244,10 @@ namespace UILayoutStudio.EditorTools
                     n.image.type = J.Str(im, "type", "Simple");
                     n.image.preserveAspect = J.Bool(im, "preserveAspect", false);
                     n.image.raycastTarget = J.Bool(im, "raycastTarget", true);
+                    n.image.fillMethod = J.Str(im, "fillMethod", "Radial360");
+                    n.image.fillOrigin = (int)J.Num(im, "fillOrigin", 0);
+                    n.image.fillAmount = J.Num(im, "fillAmount", 1);
+                    n.image.fillClockwise = J.Bool(im, "fillClockwise", true);
                 }
             }
 
@@ -211,8 +270,65 @@ namespace UILayoutStudio.EditorTools
                     t.fontSizeMax = J.Num(tx, "fontSizeMax", 72);
                     t.lineSpacing = J.Num(tx, "lineSpacing", 0);
                     t.characterSpacing = J.Num(tx, "characterSpacing", 0);
+                    if (J.Obj(tx, "margin") is Dictionary<string, object> mg)
+                        t.margin = new Vector4(J.Num(mg, "left", 0), J.Num(mg, "top", 0), J.Num(mg, "right", 0), J.Num(mg, "bottom", 0));
                 }
             }
+
+            if (J.Obj(o, "layoutGroup") is Dictionary<string, object> lg)
+            {
+                var g = n.layoutGroup = new LayoutGroupData();
+                g.type = J.Str(lg, "type", LayoutGroupData.Horizontal);
+                if (J.Obj(lg, "padding") is Dictionary<string, object> pad)
+                {
+                    g.paddingLeft = Mathf.RoundToInt(J.Num(pad, "left", 0));
+                    g.paddingRight = Mathf.RoundToInt(J.Num(pad, "right", 0));
+                    g.paddingTop = Mathf.RoundToInt(J.Num(pad, "top", 0));
+                    g.paddingBottom = Mathf.RoundToInt(J.Num(pad, "bottom", 0));
+                }
+                g.childAlignment = J.Str(lg, "childAlignment", "UpperLeft");
+                g.spacing = J.Num(lg, "spacing", 0);
+                g.reverseArrangement = J.Bool(lg, "reverseArrangement", false);
+                g.childControlWidth = J.Bool(lg, "childControlWidth", false);
+                g.childControlHeight = J.Bool(lg, "childControlHeight", false);
+                g.childScaleWidth = J.Bool(lg, "childScaleWidth", false);
+                g.childScaleHeight = J.Bool(lg, "childScaleHeight", false);
+                g.childForceExpandWidth = J.Bool(lg, "childForceExpandWidth", true);
+                g.childForceExpandHeight = J.Bool(lg, "childForceExpandHeight", true);
+                g.cellSize = J.V2(lg, "cellSize", new Vector2(100, 100));
+                g.gridSpacing = J.V2(lg, "gridSpacing", Vector2.zero);
+                g.startCorner = J.Str(lg, "startCorner", "UpperLeft");
+                g.startAxis = J.Str(lg, "startAxis", "Horizontal");
+                g.constraint = J.Str(lg, "constraint", "Flexible");
+                g.constraintCount = (int)J.Num(lg, "constraintCount", 2);
+            }
+
+            if (J.Obj(o, "layoutElement") is Dictionary<string, object> le)
+            {
+                var e = n.layoutElement = new LayoutElementData();
+                e.ignoreLayout = J.Bool(le, "ignoreLayout", false);
+                e.minWidth = J.Num(le, "minWidth", -1);
+                e.minHeight = J.Num(le, "minHeight", -1);
+                e.preferredWidth = J.Num(le, "preferredWidth", -1);
+                e.preferredHeight = J.Num(le, "preferredHeight", -1);
+                e.flexibleWidth = J.Num(le, "flexibleWidth", -1);
+                e.flexibleHeight = J.Num(le, "flexibleHeight", -1);
+                e.layoutPriority = (int)J.Num(le, "layoutPriority", 1);
+            }
+
+            if (J.Obj(o, "contentSizeFitter") is Dictionary<string, object> cf)
+                n.contentSizeFitter = new ContentSizeFitterData
+                {
+                    horizontalFit = J.Str(cf, "horizontalFit", "Unconstrained"),
+                    verticalFit = J.Str(cf, "verticalFit", "Unconstrained"),
+                };
+
+            if (J.Obj(o, "mask") is Dictionary<string, object> mk)
+                n.mask = new MaskData
+                {
+                    type = J.Str(mk, "type", MaskData.TypeMask),
+                    showMaskGraphic = J.Bool(mk, "showMaskGraphic", true),
+                };
 
             if (J.Arr(o, "children") is List<object> cl)
                 foreach (var c in cl)

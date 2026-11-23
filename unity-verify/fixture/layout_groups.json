@@ -1,0 +1,5422 @@
+{
+  "format": "ui-layout-studio",
+  "version": 1,
+  "name": "LayoutGroups",
+  "canvas": {
+    "referenceResolution": {
+      "x": 1080,
+      "y": 1920
+    },
+    "screenMatchMode": "Expand",
+    "match": 1,
+    "referencePixelsPerUnit": 100
+  },
+  "sprites": [
+    {
+      "id": "spr9",
+      "file": "slice9.png",
+      "width": 64,
+      "height": 48,
+      "border": [
+        10,
+        12,
+        14,
+        16
+      ]
+    }
+  ],
+  "root": {
+    "id": "root",
+    "name": "LayoutGroups",
+    "type": "Group",
+    "active": true,
+    "rect": {
+      "anchorMin": {
+        "x": 0,
+        "y": 0
+      },
+      "anchorMax": {
+        "x": 1,
+        "y": 1
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "anchoredPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "sizeDelta": {
+        "x": 0,
+        "y": 0
+      },
+      "rotation": 0,
+      "scale": {
+        "x": 1,
+        "y": 1
+      }
+    },
+    "children": [
+      {
+        "id": "hA",
+        "name": "hA",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 0,
+            "y": -20
+          },
+          "sizeDelta": {
+            "x": -80,
+            "y": 140
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Horizontal",
+          "padding": {
+            "left": 10,
+            "right": 20,
+            "top": 5,
+            "bottom": 15
+          },
+          "childAlignment": "MiddleCenter",
+          "spacing": 12,
+          "reverseArrangement": false,
+          "childControlWidth": false,
+          "childControlHeight": false,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": true,
+          "childForceExpandHeight": true
+        },
+        "children": [
+          {
+            "id": "a1",
+            "name": "a1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 100,
+                "y": 80
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.37,
+                "g": 0.61,
+                "b": 0.83,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "a2",
+            "name": "a2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 150,
+                "y": 60
+              },
+              "rotation": 10,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.74,
+                "g": 0.22,
+                "b": 0.66,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "a3",
+            "name": "a3",
+            "type": "Group",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0,
+                "y": 0
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 50,
+                "y": 120
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "children": []
+          },
+          {
+            "id": "a4",
+            "name": "a4",
+            "type": "Image",
+            "active": false,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 70,
+                "y": 70
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.11,
+                "g": 0.83,
+                "b": 0.49,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "a5",
+            "name": "a5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 60,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 0.5,
+                "y": 2
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.48,
+                "g": 0.44,
+                "b": 0.32,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hB",
+        "name": "hB",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 0,
+            "y": -180
+          },
+          "sizeDelta": {
+            "x": -40,
+            "y": 120
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Horizontal",
+          "padding": {
+            "left": 4,
+            "right": 4,
+            "top": 4,
+            "bottom": 4
+          },
+          "childAlignment": "LowerRight",
+          "spacing": 8,
+          "reverseArrangement": true,
+          "childControlWidth": true,
+          "childControlHeight": true,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": false,
+          "childForceExpandHeight": true
+        },
+        "children": [
+          {
+            "id": "b1",
+            "name": "b1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.85,
+                "g": 0.05,
+                "b": 0.15,
+                "a": 1
+              },
+              "type": "Sliced",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "b2",
+            "name": "b2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.22,
+                "g": 0.66,
+                "b": 0.98,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "b3",
+            "name": "b3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.59,
+                "g": 0.27,
+                "b": 0.81,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": 30,
+              "minHeight": -1,
+              "preferredWidth": 120,
+              "preferredHeight": -1,
+              "flexibleWidth": 0,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "b4",
+            "name": "b4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.96,
+                "g": 0.88,
+                "b": 0.64,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 40,
+              "preferredHeight": -1,
+              "flexibleWidth": 2,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "b5",
+            "name": "b5",
+            "type": "Group",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 1,
+                "y": 0
+              },
+              "anchorMax": {
+                "x": 1,
+                "y": 0
+              },
+              "pivot": {
+                "x": 1,
+                "y": 0
+              },
+              "anchoredPosition": {
+                "x": -5,
+                "y": 5
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 22
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "layoutElement": {
+              "ignoreLayout": true,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": -1,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "b6",
+            "name": "b6",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.33,
+                "g": 0.49,
+                "b": 0.47,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": 50,
+              "minHeight": 20,
+              "preferredWidth": -1,
+              "preferredHeight": 200,
+              "flexibleWidth": 1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "b7",
+            "name": "b7",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.7,
+                "g": 0.1,
+                "b": 0.3,
+                "a": 1
+              },
+              "type": "Filled",
+              "preserveAspect": false,
+              "raycastTarget": true,
+              "fillMethod": "Radial90",
+              "fillOrigin": 2,
+              "fillAmount": 0.4,
+              "fillClockwise": false
+            },
+            "children": []
+          },
+          {
+            "id": "b8",
+            "name": "b8",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.07,
+                "g": 0.71,
+                "b": 0.13,
+                "a": 1
+              },
+              "type": "Sliced",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 10,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 0
+            },
+            "children": []
+          },
+          {
+            "id": "b9",
+            "name": "b9",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.44,
+                "g": 0.32,
+                "b": 0.96,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 10,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hC",
+        "name": "hC",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 0,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 20,
+            "y": -320
+          },
+          "sizeDelta": {
+            "x": 700,
+            "y": 150
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Horizontal",
+          "padding": {
+            "left": 0,
+            "right": 10,
+            "top": 8,
+            "bottom": 0
+          },
+          "childAlignment": "UpperRight",
+          "spacing": 6,
+          "reverseArrangement": false,
+          "childControlWidth": true,
+          "childControlHeight": false,
+          "childScaleWidth": true,
+          "childScaleHeight": true,
+          "childForceExpandWidth": false,
+          "childForceExpandHeight": false
+        },
+        "children": [
+          {
+            "id": "c1",
+            "name": "c1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 60
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 0.5,
+                "y": 1.5
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.81,
+                "g": 0.93,
+                "b": 0.79,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 100,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "c2",
+            "name": "c2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.18,
+                "g": 0.54,
+                "b": 0.62,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "c3",
+            "name": "c3",
+            "type": "Group",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 50
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "children": []
+          },
+          {
+            "id": "c4",
+            "name": "c4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 70
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 2,
+                "y": 0.5
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.55,
+                "g": 0.15,
+                "b": 0.45,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 80,
+              "preferredHeight": -1,
+              "flexibleWidth": 1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hD",
+        "name": "hD",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 1,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 1
+          },
+          "pivot": {
+            "x": 1,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": -20,
+            "y": -320
+          },
+          "sizeDelta": {
+            "x": 300,
+            "y": 150
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": null,
+          "color": {
+            "r": 0.03,
+            "g": 0.59,
+            "b": 0.77,
+            "a": 1
+          },
+          "type": "Simple",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "layoutGroup": {
+          "type": "Horizontal",
+          "padding": {
+            "left": 30,
+            "right": 0,
+            "top": 0,
+            "bottom": 10
+          },
+          "childAlignment": "LowerCenter",
+          "spacing": -10,
+          "reverseArrangement": false,
+          "childControlWidth": false,
+          "childControlHeight": true,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": true,
+          "childForceExpandHeight": false
+        },
+        "children": [
+          {
+            "id": "d1",
+            "name": "d1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 50,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.92,
+                "g": 0.76,
+                "b": 0.28,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": -1,
+              "preferredHeight": 60,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "d2",
+            "name": "d2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 70,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.29,
+                "g": 0.37,
+                "b": 0.11,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": 90,
+              "preferredWidth": -1,
+              "preferredHeight": 40,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "d3",
+            "name": "d3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.66,
+                "g": 0.98,
+                "b": 0.94,
+                "a": 1
+              },
+              "type": "Sliced",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": -1,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": 1,
+              "layoutPriority": 1
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hE",
+        "name": "hE",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 0,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 740,
+            "y": -320
+          },
+          "sizeDelta": {
+            "x": 200,
+            "y": 60
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Horizontal"
+        },
+        "children": [
+          {
+            "id": "e1",
+            "name": "e1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 20
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.4,
+                "g": 0.2,
+                "b": 0.6,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {},
+            "children": []
+          },
+          {
+            "id": "e2",
+            "name": "e2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 25
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.77,
+                "g": 0.81,
+                "b": 0.43,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "vA",
+        "name": "vA",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 0,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 20,
+            "y": -500
+          },
+          "sizeDelta": {
+            "x": 320,
+            "y": 600
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Vertical",
+          "padding": {
+            "left": 12,
+            "right": 8,
+            "top": 20,
+            "bottom": 4
+          },
+          "childAlignment": "UpperCenter",
+          "spacing": 10,
+          "reverseArrangement": false,
+          "childControlWidth": true,
+          "childControlHeight": false,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": true,
+          "childForceExpandHeight": false
+        },
+        "children": [
+          {
+            "id": "v1",
+            "name": "v1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 60
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.14,
+                "g": 0.42,
+                "b": 0.26,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "v2",
+            "name": "v2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 100
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.51,
+                "g": 0.03,
+                "b": 0.09,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 100,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "v3",
+            "name": "v3",
+            "type": "Group",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 80
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "layoutGroup": {
+              "type": "Horizontal",
+              "padding": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "childAlignment": "UpperLeft",
+              "spacing": 4,
+              "reverseArrangement": false,
+              "childControlWidth": true,
+              "childControlHeight": true,
+              "childScaleWidth": false,
+              "childScaleHeight": false,
+              "childForceExpandWidth": true,
+              "childForceExpandHeight": true
+            },
+            "children": [
+              {
+                "id": "v3a",
+                "name": "v3a",
+                "type": "Image",
+                "active": true,
+                "rect": {
+                  "anchorMin": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "anchorMax": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "pivot": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "anchoredPosition": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "sizeDelta": {
+                    "x": 10,
+                    "y": 10
+                  },
+                  "rotation": 0,
+                  "scale": {
+                    "x": 1,
+                    "y": 1
+                  }
+                },
+                "image": {
+                  "sprite": null,
+                  "color": {
+                    "r": 0.88,
+                    "g": 0.64,
+                    "b": 0.92,
+                    "a": 1
+                  },
+                  "type": "Simple",
+                  "preserveAspect": false,
+                  "raycastTarget": true
+                },
+                "layoutElement": {
+                  "ignoreLayout": false,
+                  "minWidth": -1,
+                  "minHeight": -1,
+                  "preferredWidth": -1,
+                  "preferredHeight": -1,
+                  "flexibleWidth": 1,
+                  "flexibleHeight": -1,
+                  "layoutPriority": 1
+                },
+                "children": []
+              },
+              {
+                "id": "v3b",
+                "name": "v3b",
+                "type": "Image",
+                "active": true,
+                "rect": {
+                  "anchorMin": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "anchorMax": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "pivot": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "anchoredPosition": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "sizeDelta": {
+                    "x": 10,
+                    "y": 10
+                  },
+                  "rotation": 0,
+                  "scale": {
+                    "x": 1,
+                    "y": 1
+                  }
+                },
+                "image": {
+                  "sprite": null,
+                  "color": {
+                    "r": 0.25,
+                    "g": 0.25,
+                    "b": 0.75,
+                    "a": 1
+                  },
+                  "type": "Simple",
+                  "preserveAspect": false,
+                  "raycastTarget": true
+                },
+                "layoutElement": {
+                  "ignoreLayout": false,
+                  "minWidth": -1,
+                  "minHeight": -1,
+                  "preferredWidth": -1,
+                  "preferredHeight": -1,
+                  "flexibleWidth": 2,
+                  "flexibleHeight": -1,
+                  "layoutPriority": 1
+                },
+                "children": []
+              },
+              {
+                "id": "v3c",
+                "name": "v3c",
+                "type": "Image",
+                "active": true,
+                "rect": {
+                  "anchorMin": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "anchorMax": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "pivot": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "anchoredPosition": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "sizeDelta": {
+                    "x": 10,
+                    "y": 10
+                  },
+                  "rotation": 0,
+                  "scale": {
+                    "x": 1,
+                    "y": 1
+                  }
+                },
+                "image": {
+                  "sprite": null,
+                  "color": {
+                    "r": 0.62,
+                    "g": 0.86,
+                    "b": 0.58,
+                    "a": 1
+                  },
+                  "type": "Simple",
+                  "preserveAspect": false,
+                  "raycastTarget": true
+                },
+                "layoutElement": {
+                  "ignoreLayout": false,
+                  "minWidth": -1,
+                  "minHeight": -1,
+                  "preferredWidth": 50,
+                  "preferredHeight": -1,
+                  "flexibleWidth": -1,
+                  "flexibleHeight": -1,
+                  "layoutPriority": 1
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "v4",
+            "name": "v4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0,
+                "y": 0
+              },
+              "anchorMax": {
+                "x": 0,
+                "y": 0
+              },
+              "pivot": {
+                "x": 0,
+                "y": 0
+              },
+              "anchoredPosition": {
+                "x": 3,
+                "y": 7
+              },
+              "sizeDelta": {
+                "x": 40,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.99,
+                "g": 0.47,
+                "b": 0.41,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": true,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": -1,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "v5",
+            "name": "v5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 50
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.36,
+                "g": 0.08,
+                "b": 0.24,
+                "a": 1
+              },
+              "type": "Sliced",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "vB",
+        "name": "vB",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": 20,
+            "y": 40
+          },
+          "sizeDelta": {
+            "x": 320,
+            "y": -1140
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Vertical",
+          "padding": {
+            "left": 5,
+            "right": 5,
+            "top": 10,
+            "bottom": 10
+          },
+          "childAlignment": "LowerLeft",
+          "spacing": 15,
+          "reverseArrangement": true,
+          "childControlWidth": false,
+          "childControlHeight": true,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": false,
+          "childForceExpandHeight": true
+        },
+        "children": [
+          {
+            "id": "w1",
+            "name": "w1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 200,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.73,
+                "g": 0.69,
+                "b": 0.07,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": 50,
+              "preferredWidth": -1,
+              "preferredHeight": 100,
+              "flexibleWidth": -1,
+              "flexibleHeight": 1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "w2",
+            "name": "w2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 150,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.1,
+                "g": 0.3,
+                "b": 0.9,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": -1,
+              "preferredHeight": 80,
+              "flexibleWidth": -1,
+              "flexibleHeight": 3,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "w3",
+            "name": "w3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 100,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.47,
+                "g": 0.91,
+                "b": 0.73,
+                "a": 1
+              },
+              "type": "Sliced",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "w4",
+            "name": "w4",
+            "type": "Group",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 90,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": 120,
+              "preferredWidth": -1,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": 0,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "w5",
+            "name": "w5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 64,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.84,
+                "g": 0.52,
+                "b": 0.56,
+                "a": 1
+              },
+              "type": "Filled",
+              "preserveAspect": false,
+              "raycastTarget": true,
+              "fillMethod": "Vertical",
+              "fillOrigin": 1,
+              "fillAmount": 0.6,
+              "fillClockwise": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "vC",
+        "name": "vC",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 0,
+            "y": -500
+          },
+          "sizeDelta": {
+            "x": 10,
+            "y": 10
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": null,
+          "color": {
+            "r": 0.32,
+            "g": 0.96,
+            "b": 0.88,
+            "a": 1
+          },
+          "type": "Simple",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "layoutGroup": {
+          "type": "Vertical",
+          "padding": {
+            "left": 6,
+            "right": 6,
+            "top": 6,
+            "bottom": 6
+          },
+          "childAlignment": "MiddleRight",
+          "spacing": 3,
+          "reverseArrangement": false,
+          "childControlWidth": true,
+          "childControlHeight": true,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": false,
+          "childForceExpandHeight": false
+        },
+        "contentSizeFitter": {
+          "horizontalFit": "PreferredSize",
+          "verticalFit": "PreferredSize"
+        },
+        "mask": {
+          "type": "RectMask2D"
+        },
+        "children": [
+          {
+            "id": "x1",
+            "name": "x1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.21,
+                "g": 0.13,
+                "b": 0.39,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": -1,
+              "preferredWidth": 120,
+              "preferredHeight": 30,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "x2",
+            "name": "x2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.58,
+                "g": 0.74,
+                "b": 0.22,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": 45,
+              "preferredWidth": 80,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "x3",
+            "name": "x3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 10,
+                "y": 10
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": "spr9",
+              "color": {
+                "r": 0.95,
+                "g": 0.35,
+                "b": 0.05,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "vD",
+        "name": "vD",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": 0,
+            "y": -800
+          },
+          "sizeDelta": {
+            "x": 180,
+            "y": 10
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Vertical",
+          "padding": {
+            "left": 0,
+            "right": 0,
+            "top": 7,
+            "bottom": 9
+          },
+          "childAlignment": "UpperRight",
+          "spacing": 5,
+          "reverseArrangement": false,
+          "childControlWidth": false,
+          "childControlHeight": false,
+          "childScaleWidth": false,
+          "childScaleHeight": false,
+          "childForceExpandWidth": false,
+          "childForceExpandHeight": true
+        },
+        "contentSizeFitter": {
+          "horizontalFit": "Unconstrained",
+          "verticalFit": "MinSize"
+        },
+        "children": [
+          {
+            "id": "y1",
+            "name": "y1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 60,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.69,
+                "g": 0.57,
+                "b": 0.71,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "layoutElement": {
+              "ignoreLayout": false,
+              "minWidth": -1,
+              "minHeight": 25,
+              "preferredWidth": -1,
+              "preferredHeight": -1,
+              "flexibleWidth": -1,
+              "flexibleHeight": -1,
+              "layoutPriority": 1
+            },
+            "children": []
+          },
+          {
+            "id": "y2",
+            "name": "y2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 90,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.06,
+                "g": 0.18,
+                "b": 0.54,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "gA",
+        "name": "gA",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.6,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 1
+          },
+          "pivot": {
+            "x": 1,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": -20,
+            "y": -500
+          },
+          "sizeDelta": {
+            "x": -40,
+            "y": 300
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Grid",
+          "padding": {
+            "left": 8,
+            "right": 8,
+            "top": 8,
+            "bottom": 8
+          },
+          "childAlignment": "UpperLeft",
+          "cellSize": {
+            "x": 100,
+            "y": 80
+          },
+          "gridSpacing": {
+            "x": 10,
+            "y": 6
+          },
+          "startCorner": "UpperLeft",
+          "startAxis": "Horizontal",
+          "constraint": "Flexible",
+          "constraintCount": 2
+        },
+        "children": [
+          {
+            "id": "ga1",
+            "name": "ga1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.43,
+                "g": 0.79,
+                "b": 0.37,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ga2",
+            "name": "ga2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 32
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.8,
+                "g": 0.4,
+                "b": 0.2,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ga3",
+            "name": "ga3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 36,
+                "y": 34
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.17,
+                "g": 0.01,
+                "b": 0.03,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ga4",
+            "name": "ga4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 39,
+                "y": 36
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.54,
+                "g": 0.62,
+                "b": 0.86,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ga5",
+            "name": "ga5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 42,
+                "y": 38
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.91,
+                "g": 0.23,
+                "b": 0.69,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ga6",
+            "name": "ga6",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 45,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.28,
+                "g": 0.84,
+                "b": 0.52,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ga7",
+            "name": "ga7",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 48,
+                "y": 42
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.65,
+                "g": 0.45,
+                "b": 0.35,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "gB",
+        "name": "gB",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.6,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 1
+          },
+          "pivot": {
+            "x": 1,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": -20,
+            "y": -820
+          },
+          "sizeDelta": {
+            "x": -40,
+            "y": 250
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Grid",
+          "padding": {
+            "left": 10,
+            "right": 0,
+            "top": 0,
+            "bottom": 20
+          },
+          "childAlignment": "MiddleCenter",
+          "cellSize": {
+            "x": 60,
+            "y": 50
+          },
+          "gridSpacing": {
+            "x": 4,
+            "y": 8
+          },
+          "startCorner": "LowerRight",
+          "startAxis": "Vertical",
+          "constraint": "FixedColumnCount",
+          "constraintCount": 3
+        },
+        "children": [
+          {
+            "id": "gb1",
+            "name": "gb1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.02,
+                "g": 0.06,
+                "b": 0.18,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb2",
+            "name": "gb2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 32
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.39,
+                "g": 0.67,
+                "b": 0.01,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb3",
+            "name": "gb3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 36,
+                "y": 34
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.76,
+                "g": 0.28,
+                "b": 0.84,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb4",
+            "name": "gb4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 39,
+                "y": 36
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.13,
+                "g": 0.89,
+                "b": 0.67,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb5",
+            "name": "gb5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 42,
+                "y": 38
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.5,
+                "g": 0.5,
+                "b": 0.5,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb6",
+            "name": "gb6",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 45,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.87,
+                "g": 0.11,
+                "b": 0.33,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb7",
+            "name": "gb7",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 48,
+                "y": 42
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.24,
+                "g": 0.72,
+                "b": 0.16,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gb8",
+            "name": "gb8",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 51,
+                "y": 44
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.61,
+                "g": 0.33,
+                "b": 0.99,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "gC",
+        "name": "gC",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.6,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 0
+          },
+          "pivot": {
+            "x": 1,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": -20,
+            "y": 20
+          },
+          "sizeDelta": {
+            "x": -40,
+            "y": 150
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Grid",
+          "padding": {
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "bottom": 0
+          },
+          "childAlignment": "LowerRight",
+          "cellSize": {
+            "x": 70,
+            "y": 40
+          },
+          "gridSpacing": {
+            "x": 5,
+            "y": 5
+          },
+          "startCorner": "UpperRight",
+          "startAxis": "Horizontal",
+          "constraint": "FixedRowCount",
+          "constraintCount": 2
+        },
+        "children": [
+          {
+            "id": "gc1",
+            "name": "gc1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.98,
+                "g": 0.94,
+                "b": 0.82,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gc2",
+            "name": "gc2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 32
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.35,
+                "g": 0.55,
+                "b": 0.65,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gc3",
+            "name": "gc3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 36,
+                "y": 34
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.72,
+                "g": 0.16,
+                "b": 0.48,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gc4",
+            "name": "gc4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 39,
+                "y": 36
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.09,
+                "g": 0.77,
+                "b": 0.31,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gc5",
+            "name": "gc5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 42,
+                "y": 38
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.46,
+                "g": 0.38,
+                "b": 0.14,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "gD",
+        "name": "gD",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 0,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": -60,
+            "y": -120
+          },
+          "sizeDelta": {
+            "x": 10,
+            "y": 10
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Grid",
+          "padding": {
+            "left": 1,
+            "right": 2,
+            "top": 3,
+            "bottom": 4
+          },
+          "childAlignment": "LowerCenter",
+          "cellSize": {
+            "x": 50,
+            "y": 50
+          },
+          "gridSpacing": {
+            "x": 2,
+            "y": 3
+          },
+          "startCorner": "LowerLeft",
+          "startAxis": "Horizontal",
+          "constraint": "FixedColumnCount",
+          "constraintCount": 4
+        },
+        "contentSizeFitter": {
+          "horizontalFit": "PreferredSize",
+          "verticalFit": "PreferredSize"
+        },
+        "children": [
+          {
+            "id": "gd1",
+            "name": "gd1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.83,
+                "g": 0.99,
+                "b": 0.97,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gd2",
+            "name": "gd2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 32
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.2,
+                "g": 0.6,
+                "b": 0.8,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gd3",
+            "name": "gd3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 36,
+                "y": 34
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.57,
+                "g": 0.21,
+                "b": 0.63,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gd4",
+            "name": "gd4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 39,
+                "y": 36
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.94,
+                "g": 0.82,
+                "b": 0.46,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gd5",
+            "name": "gd5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 42,
+                "y": 38
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.31,
+                "g": 0.43,
+                "b": 0.29,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gd6",
+            "name": "gd6",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 45,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.68,
+                "g": 0.04,
+                "b": 0.12,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "gE",
+        "name": "gE",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.6,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 1,
+            "y": 1
+          },
+          "pivot": {
+            "x": 1,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": -20,
+            "y": 190
+          },
+          "sizeDelta": {
+            "x": -40,
+            "y": -1290
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Grid",
+          "padding": {
+            "left": 3,
+            "right": 5,
+            "top": 7,
+            "bottom": 9
+          },
+          "childAlignment": "MiddleLeft",
+          "cellSize": {
+            "x": 80,
+            "y": 60
+          },
+          "gridSpacing": {
+            "x": 6,
+            "y": 6
+          },
+          "startCorner": "UpperRight",
+          "startAxis": "Vertical",
+          "constraint": "Flexible",
+          "constraintCount": 2
+        },
+        "children": [
+          {
+            "id": "ge1",
+            "name": "ge1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.05,
+                "g": 0.65,
+                "b": 0.95,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge2",
+            "name": "ge2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 32
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.42,
+                "g": 0.26,
+                "b": 0.78,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge3",
+            "name": "ge3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 36,
+                "y": 34
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.79,
+                "g": 0.87,
+                "b": 0.61,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge4",
+            "name": "ge4",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 39,
+                "y": 36
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.16,
+                "g": 0.48,
+                "b": 0.44,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge5",
+            "name": "ge5",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 42,
+                "y": 38
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.53,
+                "g": 0.09,
+                "b": 0.27,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge6",
+            "name": "ge6",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 45,
+                "y": 40
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.9,
+                "g": 0.7,
+                "b": 0.1,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge7",
+            "name": "ge7",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 48,
+                "y": 42
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.27,
+                "g": 0.31,
+                "b": 0.93,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge8",
+            "name": "ge8",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 51,
+                "y": 44
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.64,
+                "g": 0.92,
+                "b": 0.76,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "ge9",
+            "name": "ge9",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 54,
+                "y": 46
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.01,
+                "g": 0.53,
+                "b": 0.59,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "gF",
+        "name": "gF",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchoredPosition": {
+            "x": -200,
+            "y": -300
+          },
+          "sizeDelta": {
+            "x": 150,
+            "y": 90
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "layoutGroup": {
+          "type": "Grid"
+        },
+        "children": [
+          {
+            "id": "gf1",
+            "name": "gf1",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 30,
+                "y": 30
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.38,
+                "g": 0.14,
+                "b": 0.42,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gf2",
+            "name": "gf2",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 33,
+                "y": 32
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.75,
+                "g": 0.75,
+                "b": 0.25,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          },
+          {
+            "id": "gf3",
+            "name": "gf3",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 36,
+                "y": 34
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.12,
+                "g": 0.36,
+                "b": 0.08,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "mask1",
+        "name": "mask1",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": -100,
+            "y": 40
+          },
+          "sizeDelta": {
+            "x": 150,
+            "y": 150
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": null,
+          "color": {
+            "r": 0.86,
+            "g": 0.58,
+            "b": 0.74,
+            "a": 1
+          },
+          "type": "Simple",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "mask": {
+          "type": "Mask",
+          "showMaskGraphic": false
+        },
+        "children": [
+          {
+            "id": "mask1c",
+            "name": "mask1c",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 30,
+                "y": 30
+              },
+              "sizeDelta": {
+                "x": 200,
+                "y": 120
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.49,
+                "g": 0.97,
+                "b": 0.91,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "mask2",
+        "name": "mask2",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": 80,
+            "y": 40
+          },
+          "sizeDelta": {
+            "x": 120,
+            "y": 150
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": "spr9",
+          "color": {
+            "r": 0.6,
+            "g": 0.8,
+            "b": 0.4,
+            "a": 1
+          },
+          "type": "Sliced",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "mask": {
+          "type": "Mask"
+        },
+        "children": [
+          {
+            "id": "mask2c",
+            "name": "mask2c",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0,
+                "y": 0
+              },
+              "anchorMax": {
+                "x": 1,
+                "y": 1
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 10,
+                "y": -10
+              },
+              "sizeDelta": {
+                "x": 20,
+                "y": 20
+              },
+              "rotation": 0,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.23,
+                "g": 0.19,
+                "b": 0.57,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "rmask",
+        "name": "rmask",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": -100,
+            "y": 220
+          },
+          "sizeDelta": {
+            "x": 140,
+            "y": 100
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "mask": {
+          "type": "RectMask2D"
+        },
+        "children": [
+          {
+            "id": "rmaskc",
+            "name": "rmaskc",
+            "type": "Image",
+            "active": true,
+            "rect": {
+              "anchorMin": {
+                "x": 0,
+                "y": 1
+              },
+              "anchorMax": {
+                "x": 0,
+                "y": 1
+              },
+              "pivot": {
+                "x": 0,
+                "y": 1
+              },
+              "anchoredPosition": {
+                "x": -20,
+                "y": 20
+              },
+              "sizeDelta": {
+                "x": 100,
+                "y": 100
+              },
+              "rotation": 30,
+              "scale": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            "image": {
+              "sprite": null,
+              "color": {
+                "r": 0.97,
+                "g": 0.41,
+                "b": 0.23,
+                "a": 1
+              },
+              "type": "Simple",
+              "preserveAspect": false,
+              "raycastTarget": true
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "fill1",
+        "name": "fill1",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": 80,
+            "y": 220
+          },
+          "sizeDelta": {
+            "x": 100,
+            "y": 100
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": "spr9",
+          "color": {
+            "r": 0.34,
+            "g": 0.02,
+            "b": 0.06,
+            "a": 1
+          },
+          "type": "Filled",
+          "preserveAspect": false,
+          "raycastTarget": true,
+          "fillMethod": "Radial360",
+          "fillOrigin": 2,
+          "fillAmount": 0.3,
+          "fillClockwise": false
+        },
+        "children": []
+      },
+      {
+        "id": "fill2",
+        "name": "fill2",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": -100,
+            "y": 340
+          },
+          "sizeDelta": {
+            "x": 160,
+            "y": 40
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": null,
+          "color": {
+            "r": 0.71,
+            "g": 0.63,
+            "b": 0.89,
+            "a": 1
+          },
+          "type": "Filled",
+          "preserveAspect": false,
+          "raycastTarget": true,
+          "fillMethod": "Horizontal",
+          "fillOrigin": 1,
+          "fillAmount": 0.75,
+          "fillClockwise": true
+        },
+        "children": []
+      },
+      {
+        "id": "fill3",
+        "name": "fill3",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": 80,
+            "y": 340
+          },
+          "sizeDelta": {
+            "x": 60,
+            "y": 100
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": "spr9",
+          "color": {
+            "r": 0.08,
+            "g": 0.24,
+            "b": 0.72,
+            "a": 1
+          },
+          "type": "Filled",
+          "preserveAspect": false,
+          "raycastTarget": true,
+          "fillMethod": "Radial180",
+          "fillOrigin": 3,
+          "fillAmount": 0.5
+        },
+        "children": []
+      },
+      {
+        "id": "fill4",
+        "name": "fill4",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": 160,
+            "y": 340
+          },
+          "sizeDelta": {
+            "x": 60,
+            "y": 60
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": null,
+          "color": {
+            "r": 0.45,
+            "g": 0.85,
+            "b": 0.55,
+            "a": 1
+          },
+          "type": "Filled",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "children": []
+      },
+      {
+        "id": "fitA",
+        "name": "fitA",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchoredPosition": {
+            "x": -150,
+            "y": 0
+          },
+          "sizeDelta": {
+            "x": 10,
+            "y": 10
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": "spr9",
+          "color": {
+            "r": 0.82,
+            "g": 0.46,
+            "b": 0.38,
+            "a": 1
+          },
+          "type": "Sliced",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "contentSizeFitter": {
+          "horizontalFit": "PreferredSize",
+          "verticalFit": "PreferredSize"
+        },
+        "children": []
+      },
+      {
+        "id": "fitB",
+        "name": "fitB",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 0,
+            "y": 1
+          },
+          "anchoredPosition": {
+            "x": -100,
+            "y": 0
+          },
+          "sizeDelta": {
+            "x": 10,
+            "y": 77
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": "spr9",
+          "color": {
+            "r": 0.19,
+            "g": 0.07,
+            "b": 0.21,
+            "a": 1
+          },
+          "type": "Simple",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "contentSizeFitter": {
+          "horizontalFit": "PreferredSize",
+          "verticalFit": "Unconstrained"
+        },
+        "children": []
+      },
+      {
+        "id": "fitC",
+        "name": "fitC",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 1,
+            "y": 0
+          },
+          "anchoredPosition": {
+            "x": -10,
+            "y": 20
+          },
+          "sizeDelta": {
+            "x": 33,
+            "y": 44
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": "spr9",
+          "color": {
+            "r": 0.56,
+            "g": 0.68,
+            "b": 0.04,
+            "a": 1
+          },
+          "type": "Filled",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "contentSizeFitter": {
+          "horizontalFit": "MinSize",
+          "verticalFit": "PreferredSize"
+        },
+        "children": []
+      },
+      {
+        "id": "fitD",
+        "name": "fitD",
+        "type": "Group",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchoredPosition": {
+            "x": -150,
+            "y": 100
+          },
+          "sizeDelta": {
+            "x": 40,
+            "y": 40
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "contentSizeFitter": {},
+        "children": []
+      },
+      {
+        "id": "loneLE",
+        "name": "loneLE",
+        "type": "Image",
+        "active": true,
+        "rect": {
+          "anchorMin": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchorMax": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchoredPosition": {
+            "x": -150,
+            "y": 200
+          },
+          "sizeDelta": {
+            "x": 50,
+            "y": 30
+          },
+          "rotation": 0,
+          "scale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "image": {
+          "sprite": null,
+          "color": {
+            "r": 0.93,
+            "g": 0.29,
+            "b": 0.87,
+            "a": 1
+          },
+          "type": "Simple",
+          "preserveAspect": false,
+          "raycastTarget": true
+        },
+        "layoutElement": {
+          "ignoreLayout": false,
+          "minWidth": -1,
+          "minHeight": 200,
+          "preferredWidth": 300,
+          "preferredHeight": -1,
+          "flexibleWidth": -1,
+          "flexibleHeight": -1,
+          "layoutPriority": 1
+        },
+        "children": []
+      }
+    ]
+  }
+}

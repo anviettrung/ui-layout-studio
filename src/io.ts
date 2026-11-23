@@ -1,6 +1,6 @@
 // Nhập/xuất tệp: thêm PNG, font, mở/lưu gói zip, tự lưu vào IndexedDB.
 import JSZip from 'jszip'
-import { newId } from './model/defaults'
+import { newId, normalizeNode } from './model/defaults'
 import type { LayoutDocument, SpriteAsset } from './model/types'
 import { FORMAT_ID, FORMAT_VERSION } from './model/types'
 import { usedSprites } from './model/tree'
@@ -122,6 +122,7 @@ export async function openZip(file: Blob) {
   const doc = JSON.parse(await jsonFile.async('string')) as LayoutDocument
   if (doc.format !== FORMAT_ID) throw new Error('layout.json không đúng định dạng')
   if (doc.version > FORMAT_VERSION) throw new Error(`Tệp tạo bằng bản mới hơn (v${doc.version}). Hãy tải lại trang.`)
+  doc.root = normalizeNode(doc.root)
   const images: Record<string, SpriteImage> = {}
   for (const s of doc.sprites) {
     const f = zip.file(`sprites/${s.file}`)

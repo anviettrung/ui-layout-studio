@@ -50,7 +50,8 @@ export interface SpriteAsset {
   border: [number, number, number, number]
 }
 
-export type ImageType = 'Simple' | 'Sliced'
+export type ImageType = 'Simple' | 'Sliced' | 'Filled'
+export type FillMethod = 'Horizontal' | 'Vertical' | 'Radial90' | 'Radial180' | 'Radial360'
 
 export interface ImageData {
   sprite: string | null
@@ -58,6 +59,10 @@ export interface ImageData {
   type: ImageType
   preserveAspect: boolean
   raycastTarget: boolean
+  fillMethod?: FillMethod
+  fillOrigin?: number
+  fillAmount?: number
+  fillClockwise?: boolean
 }
 
 export type HAlign = 'Left' | 'Center' | 'Right'
@@ -79,6 +84,51 @@ export interface TextData {
   fontSizeMax: number
   lineSpacing: number
   characterSpacing: number
+  /** TMP_Text.margin */
+  margin?: { left: number; top: number; right: number; bottom: number }
+}
+
+export type TextAnchor =
+  | 'UpperLeft' | 'UpperCenter' | 'UpperRight'
+  | 'MiddleLeft' | 'MiddleCenter' | 'MiddleRight'
+  | 'LowerLeft' | 'LowerCenter' | 'LowerRight'
+
+export interface LayoutGroupData {
+  type: 'Horizontal' | 'Vertical' | 'Grid'
+  padding: { left: number; right: number; top: number; bottom: number }
+  childAlignment: TextAnchor
+  spacing: number
+  reverseArrangement: boolean
+  childControlWidth: boolean
+  childControlHeight: boolean
+  childScaleWidth: boolean
+  childScaleHeight: boolean
+  childForceExpandWidth: boolean
+  childForceExpandHeight: boolean
+  cellSize: Vec2
+  gridSpacing: Vec2
+  startCorner: 'UpperLeft' | 'UpperRight' | 'LowerLeft' | 'LowerRight'
+  startAxis: 'Horizontal' | 'Vertical'
+  constraint: 'Flexible' | 'FixedColumnCount' | 'FixedRowCount'
+  constraintCount: number
+}
+
+export interface LayoutElementData {
+  ignoreLayout: boolean
+  minWidth: number
+  minHeight: number
+  preferredWidth: number
+  preferredHeight: number
+  flexibleWidth: number
+  flexibleHeight: number
+  layoutPriority: number
+}
+
+export type FitMode = 'Unconstrained' | 'MinSize' | 'PreferredSize'
+
+export interface MaskData {
+  type: 'Mask' | 'RectMask2D'
+  showMaskGraphic: boolean
 }
 
 export type NodeType = 'Group' | 'Image' | 'Text' | 'SafeArea'
@@ -93,6 +143,10 @@ export interface LayoutNode {
   rect: RectTransformData
   image?: ImageData
   text?: TextData
+  layoutGroup?: LayoutGroupData
+  layoutElement?: LayoutElementData
+  contentSizeFitter?: { horizontalFit: FitMode; verticalFit: FitMode }
+  mask?: MaskData
   children: LayoutNode[]
   /** Chỉ dùng trong editor, không ảnh hưởng Unity. */
   editor?: { hidden?: boolean; locked?: boolean; collapsed?: boolean }

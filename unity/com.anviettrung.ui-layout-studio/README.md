@@ -63,6 +63,11 @@ Quy tắc khi import lại (khớp node theo `UILayoutNode.nodeId`):
   gần nhất còn tồn tại, giữ vị trí world, kèm cảnh báo trong Console.
 - GameObject và component dev tự thêm luôn giữ nguyên. Thứ tự sibling: node của layout xếp lại theo file, GameObject
   của dev giữ đúng vị trí (slot) cũ.
+- Layout group, `LayoutElement`, `ContentSizeFitter`, `Mask`, `RectMask2D`: importer ghi tên type các component do chính
+  nó thêm vào `UILayoutNode.managedComponents`. File bỏ trường thì chỉ những component này bị gỡ; component cùng loại
+  do dev tự thêm được giữ. Node đã có component cùng loại (của dev) mà file có trường đó thì component được dùng lại,
+  gán giá trị theo file, vẫn tính là của dev. File yêu cầu layout group khác loại với cái đang có thì thay
+  (Unity không cho hai layout group trên một GameObject), kèm cảnh báo nếu cái cũ là của dev.
 - Đừng xoá hay sửa `UILayoutNode` trên node do importer tạo: mất nó thì lần sau node đó bị coi là của dev và một node
   mới được tạo ra.
 
@@ -74,12 +79,21 @@ Quy tắc khi import lại (khớp node theo `UILayoutNode.nodeId`):
 | `rect.rotation` | `localEulerAngles.z` |
 | `rect.scale` | `localScale = (x, y, 1)` |
 | `Group` | chỉ `RectTransform` |
-| `Image` | `Image`: sprite (null = ô màu), color, type Simple/Sliced, preserveAspect, raycastTarget |
-| `Text` | `TextMeshProUGUI`: text, font (qua bảng ánh xạ), fontSize, color, Bold/Italic, `horizontalAlignment` + `verticalAlignment`, `textWrappingMode` (Normal/NoWrap), autoSize + min/max, lineSpacing, characterSpacing |
+| `Image` | `Image`: sprite (null = ô màu), color, type Simple/Sliced/Filled, preserveAspect, raycastTarget |
+| `image.type = "Filled"` | `Image.Type.Filled`, `fillMethod` (`Image.FillMethod` cùng tên), `fillOrigin`, `fillAmount`, `fillClockwise` |
+| `Text` | `TextMeshProUGUI`: text, font (qua bảng ánh xạ), fontSize, color, Bold/Italic, `horizontalAlignment` + `verticalAlignment`, `textWrappingMode` (Normal/NoWrap), autoSize + min/max, lineSpacing, characterSpacing, `margin` (left, top, right, bottom → `Vector4(x, y, z, w)`) |
+| `layoutGroup` | `HorizontalLayoutGroup` / `VerticalLayoutGroup` / `GridLayoutGroup`: padding (`RectOffset`), childAlignment (`TextAnchor`), spacing, reverseArrangement, childControl/Scale/ForceExpand Width/Height; Grid: cellSize, `gridSpacing` → spacing, startCorner, startAxis, constraint, constraintCount |
+| `layoutElement` | `LayoutElement`: ignoreLayout, min/preferred/flexible Width/Height (-1 = không đặt), layoutPriority |
+| `contentSizeFitter` | `ContentSizeFitter`: horizontalFit, verticalFit (`FitMode` cùng tên) |
+| `mask` | `Mask` (showMaskGraphic; cần `Image` cùng node, thiếu thì cảnh báo) hoặc `RectMask2D` |
 | `SafeArea` | kéo giãn 0..1, offset 0 + component safe area |
 | `active` | `SetActive` |
 | thứ tự `children` | thứ tự sibling |
 | `sprites[].border` [l,b,r,t] | `TextureImporter.spriteBorder = Vector4(l,b,r,t)` |
+
+Trường tuỳ chọn thiếu thì lấy mặc định như Unity (vd `childForceExpandWidth/Height` = true, `LayoutElement` -1,
+`layoutPriority` 1, Grid cell 100×100, `fillAmount` 1). Importer gắn component trước rồi mới gán `RectTransform`; node do
+layout group/ContentSizeFitter điều khiển vẫn nhận đủ giá trị `rect` trong file, Unity tự tính lại khi chạy.
 
 Sprite được chép vào thư mục sprite và đặt: Texture Type Sprite, Single, pivot giữa, Mesh Type Full Rect, mipmap tắt,
 Alpha Is Transparency, Pixels Per Unit = `canvas.referencePixelsPerUnit` (để viền 9-slice đúng kích thước như trên web),
@@ -101,4 +115,5 @@ UILayoutImporter.Reimport(prefabAsset);
 ## Kiểm chứng
 
 `unity-verify/` trong repo dựng project Unity tạm, import layout mẫu và so 4 góc từng node với kết quả công thức của
-web editor trên 8 máy × 4 chế độ CanvasScaler. Xem `unity-verify/README.md`.
+web editor trên 8 máy × 4 chế độ CanvasScaler; layout mẫu thứ hai kiểm layout group, LayoutElement, ContentSizeFitter,
+Mask, Image Filled và sinh đáp án hình học bằng Unity. Xem `unity-verify/README.md`.

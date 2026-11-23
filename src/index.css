@@ -280,3 +280,11 @@ textarea { width: 100%; resize: vertical; margin-bottom: 6px; }
   z-index: 200;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
+.driven-note { background: rgba(59, 142, 234, 0.12); border-radius: 4px; margin-bottom: 4px; }
+.driven-lock { opacity: 0.5; pointer-events: none; }
+.add-comp { padding: 8px; }
+.add-comp select { width: 100%; }
+.lg-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.lg-table th { font-weight: 500; color: var(--dim); text-align: center; }
+.lg-table td { padding: 2px; }
+.lg-table td:not(:first-child) { text-align: center; }

@@ -43,6 +43,8 @@ export interface AppState {
   future: LayoutDocument[]
   dirty: boolean
   toast: string | null
+  /** tăng mỗi lần font nạp xong: số đo chữ đổi, layout phải tính lại */
+  fontsVersion: number
 }
 
 function loadDevices(): DeviceProfile[] {
@@ -76,6 +78,7 @@ let state: AppState = {
   future: [],
   dirty: false,
   toast: null,
+  fontsVersion: 0,
 }
 
 const listeners = new Set<() => void>()

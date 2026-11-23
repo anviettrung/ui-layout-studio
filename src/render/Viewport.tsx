@@ -5,13 +5,16 @@ import {
   type CanvasFrame, type Mat, type Rect, type ResolvedNode,
 } from '../model/layout'
 import { createNode } from '../model/defaults'
-import type { DeviceProfile, LayoutNode, Vec2 } from '../model/types'
+import type { DeviceProfile, LayoutNode, SpriteAsset, Vec2 } from '../model/types'
+import { applyUILayout, type LayoutResult } from '../model/uiLayout'
+import { measureText } from './measureText'
 import { findNode, insertNode } from '../model/tree'
 import { checkpoint, getState, setState, updateDoc, updateNode, useStore } from '../store'
 import { addPngFiles } from '../io'
 import { NodeView, type RenderCtx } from './NodeView'
 
 interface Layout {
+  driven: LayoutResult['driven']
   frame: CanvasFrame
   tree: ResolvedNode
   mats: Map<string, Mat>
@@ -19,7 +22,9 @@ interface Layout {
   parentOf: Map<string, string>
 }
 
-export function computeLayout(root: LayoutNode, frame: CanvasFrame): Layout {
+export function computeLayout(docRoot: LayoutNode, frame: CanvasFrame, sprites: Record<string, SpriteAsset>): Layout {
+  // Chạy layout group / ContentSizeFitter như Unity cho đúng kích thước canvas của máy này
+  const { root, driven } = applyUILayout(docRoot, frame, { sprites, measureText })
   const tree = resolveTree(root, frame)
   const mats = worldMatrices(tree)
   const byId = new Map<string, ResolvedNode>()
@@ -32,7 +37,7 @@ export function computeLayout(root: LayoutNode, frame: CanvasFrame): Layout {
     })
   }
   visit(tree)
-  return { frame, tree, mats, byId, parentOf }
+  return { driven, frame, tree, mats, byId, parentOf }
 }
 
 interface Guide {
@@ -85,8 +90,10 @@ export function Viewport({ device, compact }: Props) {
 
   const screen = useMemo(() => deviceScreen(device, doc.canvas), [device, doc.canvas])
   const frame = useMemo(() => canvasFrame(doc.canvas, screen), [doc.canvas, screen])
-  const layout = useMemo(() => computeLayout(doc.root, frame), [doc.root, frame])
+  const fontsVersion = useStore((s) => s.fontsVersion)
   const sprites = useMemo(() => Object.fromEntries(doc.sprites.map((s) => [s.id, s])), [doc.sprites])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const layout = useMemo(() => computeLayout(doc.root, frame, sprites), [doc.root, frame, sprites, fontsVersion])
   const ctx: RenderCtx = useMemo(() => ({ sprites, images, interactive: true }), [sprites, images])
 
   const pad = compact ? 8 : 40
@@ -364,7 +371,8 @@ export function Viewport({ device, compact }: Props) {
   const sel = selection ? layout.byId.get(selection) : undefined
   const selCorners = sel && selection !== 'root' ? cornersOf(layout.mats.get(selection!)!, sel.local).map(toStage) : null
   const selType = sel?.node.type
-  const canTransform = !!sel && selection !== 'root' && selType !== 'SafeArea' && !sel.node.editor?.locked
+  const selDriven = selection ? layout.driven.get(selection) : undefined
+  const canTransform = !!sel && selection !== 'root' && selType !== 'SafeArea' && !sel.node.editor?.locked && !selDriven?.position[0] && !selDriven?.position[1]
   const anchorMarks = sel && canTransform ? anchorPoints(layout, sel.node.id).map(toStage) : []
 
   const s = frame.safe

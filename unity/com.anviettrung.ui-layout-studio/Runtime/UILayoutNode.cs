@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UILayoutStudio
@@ -16,5 +17,10 @@ namespace UILayoutStudio
 
         [Tooltip("Loại node ở lần import gần nhất (Group, Image, Text, SafeArea).")]
         public string nodeType;
+
+        [Tooltip("Tên type đầy đủ của các component tuỳ chọn (layout group, LayoutElement, ContentSizeFitter, Mask, " +
+                 "RectMask2D) do chính importer thêm. Chỉ những component này bị gỡ khi layout không còn trường tương ứng; " +
+                 "component cùng loại do dev tự thêm luôn được giữ.")]
+        public List<string> managedComponents = new List<string>();
     }
 }

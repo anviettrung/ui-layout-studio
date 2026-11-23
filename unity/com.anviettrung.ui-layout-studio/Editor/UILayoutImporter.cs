@@ -408,39 +408,22 @@ namespace UILayoutStudio.EditorTools
             return insertIndex + (rescueParent.childCount - before);
         }
 
-        private static bool IsImporterComponent(Component c, BuildContext ctx) =>
-            c is Transform || c is CanvasRenderer || c is UILayoutNode || c is Image || c is TextMeshProUGUI ||
-            (ctx.safeAreaType != null && ctx.safeAreaType.IsInstanceOfType(c));
+        private static bool IsImporterComponent(Component c, BuildContext ctx)
+        {
+            if (c is Transform || c is CanvasRenderer || c is UILayoutNode || c is Image || c is TextMeshProUGUI) return true;
+            if (ctx.safeAreaType != null && ctx.safeAreaType.IsInstanceOfType(c)) return true;
+            var ln = c.GetComponent<UILayoutNode>();
+            return ln != null && ln.managedComponents != null && ln.managedComponents.Contains(c.GetType().FullName);
+        }
 
         private static void ApplyNode(GameObject go, LayoutNodeData n, BuildContext ctx, bool isRoot)
         {
             var ln = go.GetComponent<UILayoutNode>() ?? go.AddComponent<UILayoutNode>();
+            if (ln.managedComponents == null) ln.managedComponents = new List<string>();
             string prevType = ln.nodeType;
             if (go.name != n.name) go.name = n.name;
 
             var rt = go.GetComponent<RectTransform>() ?? go.AddComponent<RectTransform>();
-            if (isRoot || n.type == LayoutNodeData.TypeSafeArea)
-            {
-                // root: luôn kéo giãn toàn màn. SafeArea: kéo giãn toàn cha, component safe area thu vào.
-                rt.anchorMin = Vector2.zero;
-                rt.anchorMax = Vector2.one;
-                rt.pivot = new Vector2(0.5f, 0.5f);
-                rt.anchoredPosition = Vector2.zero;
-                rt.sizeDelta = Vector2.zero;
-                rt.localEulerAngles = Vector3.zero;
-                rt.localScale = Vector3.one;
-            }
-            else
-            {
-                var r = n.rect;
-                rt.anchorMin = r.anchorMin;
-                rt.anchorMax = r.anchorMax;
-                rt.pivot = r.pivot;
-                rt.anchoredPosition = r.anchoredPosition;
-                rt.sizeDelta = r.sizeDelta;
-                rt.localEulerAngles = new Vector3(0, 0, r.rotation);
-                rt.localScale = new Vector3(r.scale.x, r.scale.y, 1);
-            }
 
             // Bỏ component do importer thêm ở lần trước nếu node đổi loại.
             if (prevType == LayoutNodeData.TypeImage && n.type != LayoutNodeData.TypeImage) DestroyIfAny<Image>(go);
@@ -459,8 +442,186 @@ namespace UILayoutStudio.EditorTools
                     if (ctx.safeAreaType != null && go.GetComponent(ctx.safeAreaType) == null) go.AddComponent(ctx.safeAreaType);
                     break;
             }
+
+            // Component tuỳ chọn (layout group, LayoutElement, ContentSizeFitter, Mask). Thêm xong mới gán RectTransform.
+            ApplyLayoutGroup(go, ln, n, ctx);
+            ApplyLayoutElement(go, ln, n, ctx);
+            ApplyContentSizeFitter(go, ln, n, ctx);
+            ApplyMask(go, ln, n, ctx);
+
+            if (isRoot || n.type == LayoutNodeData.TypeSafeArea)
+            {
+                // root: luôn kéo giãn toàn màn. SafeArea: kéo giãn toàn cha, component safe area thu vào.
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.pivot = new Vector2(0.5f, 0.5f);
+                rt.anchoredPosition = Vector2.zero;
+                rt.sizeDelta = Vector2.zero;
+                rt.localEulerAngles = Vector3.zero;
+                rt.localScale = Vector3.one;
+            }
+            else
+            {
+                // Node do layout group/ContentSizeFitter điều khiển vẫn được gán đủ giá trị trong file
+                // (giá trị đã tính ở máy artist); Unity tự tính lại khi chạy.
+                var r = n.rect;
+                rt.anchorMin = r.anchorMin;
+                rt.anchorMax = r.anchorMax;
+                rt.pivot = r.pivot;
+                rt.anchoredPosition = r.anchoredPosition;
+                rt.sizeDelta = r.sizeDelta;
+                rt.localEulerAngles = new Vector3(0, 0, r.rotation);
+                rt.localScale = new Vector3(r.scale.x, r.scale.y, 1);
+            }
+
             ln.nodeType = n.type;
             if (go.activeSelf != n.active) go.SetActive(n.active);
+        }
+
+        // ---------------------------------------------------------------- Component tuỳ chọn
+
+        private static readonly Type[] LayoutGroupKinds = { typeof(HorizontalLayoutGroup), typeof(VerticalLayoutGroup), typeof(GridLayoutGroup) };
+        private static readonly Type[] LayoutElementKinds = { typeof(LayoutElement) };
+        private static readonly Type[] FitterKinds = { typeof(ContentSizeFitter) };
+        private static readonly Type[] MaskKinds = { typeof(Mask), typeof(RectMask2D) };
+
+        /// <summary>
+        /// Đồng bộ một nhóm component tuỳ chọn cùng vai trò (vd ba loại layout group). <paramref name="desired"/> là type
+        /// file yêu cầu, null = file không có trường. Chỉ gỡ component có tên trong <see cref="UILayoutNode.managedComponents"/>
+        /// (importer đã thêm); component dev tự thêm được giữ, trừ khi file yêu cầu loại khác cùng vai trò (thay kèm cảnh báo,
+        /// vì Unity không cho hai layout group trên một GameObject). Component cùng loại dev đã thêm sẵn thì dùng lại
+        /// (gán giá trị theo file) nhưng vẫn coi là của dev.
+        /// </summary>
+        private static Component SyncOptional(GameObject go, UILayoutNode ln, Type desired, Type[] kinds, BuildContext ctx, string nodeName)
+        {
+            Component keep = null;
+            foreach (var t in kinds)
+            {
+                var c = go.GetComponent(t);
+                bool managed = ln.managedComponents.Contains(t.FullName);
+                if (c == null)
+                {
+                    if (managed && t != desired) ln.managedComponents.Remove(t.FullName);
+                    continue;
+                }
+                if (t == desired) { keep = c; continue; }
+                if (managed)
+                {
+                    Object.DestroyImmediate(c);
+                    ln.managedComponents.Remove(t.FullName);
+                }
+                else if (desired != null)
+                {
+                    Warn(ctx.result, $"Node \"{nodeName}\": layout cần {desired.Name} nên đã thay {t.Name} (do dev thêm).");
+                    Object.DestroyImmediate(c);
+                }
+                // desired == null và component của dev: giữ nguyên.
+            }
+            if (desired != null && keep == null)
+            {
+                keep = go.AddComponent(desired);
+                if (keep == null)
+                {
+                    Warn(ctx.result, $"Node \"{nodeName}\": không thêm được {desired.Name} (GameObject đã có component xung đột).");
+                    return null;
+                }
+                if (!ln.managedComponents.Contains(desired.FullName)) ln.managedComponents.Add(desired.FullName);
+            }
+            return keep;
+        }
+
+        private static TEnum ParseEnum<TEnum>(string value, TEnum def, string field, string nodeName, BuildContext ctx) where TEnum : struct
+        {
+            if (string.IsNullOrEmpty(value)) return def;
+            if (!char.IsDigit(value[0]) && value[0] != '-' && Enum.TryParse(value, false, out TEnum r) && Enum.IsDefined(typeof(TEnum), r)) return r;
+            Warn(ctx.result, $"Node \"{nodeName}\": {field} = \"{value}\" không hợp lệ, dùng {def}.");
+            return def;
+        }
+
+        private static void ApplyLayoutGroup(GameObject go, UILayoutNode ln, LayoutNodeData n, BuildContext ctx)
+        {
+            var d = n.layoutGroup;
+            Type desired = null;
+            if (d != null)
+            {
+                switch (d.type)
+                {
+                    case LayoutGroupData.Horizontal: desired = typeof(HorizontalLayoutGroup); break;
+                    case LayoutGroupData.Vertical: desired = typeof(VerticalLayoutGroup); break;
+                    case LayoutGroupData.Grid: desired = typeof(GridLayoutGroup); break;
+                    default:
+                        Warn(ctx.result, $"Node \"{n.name}\": layoutGroup.type lạ \"{d.type}\", bỏ qua layout group.");
+                        break;
+                }
+            }
+            var c = SyncOptional(go, ln, desired, LayoutGroupKinds, ctx, n.name) as LayoutGroup;
+            if (c == null || desired == null) return;
+
+            c.padding = new RectOffset(d.paddingLeft, d.paddingRight, d.paddingTop, d.paddingBottom);
+            c.childAlignment = ParseEnum(d.childAlignment, TextAnchor.UpperLeft, "layoutGroup.childAlignment", n.name, ctx);
+            if (c is HorizontalOrVerticalLayoutGroup hv)
+            {
+                hv.spacing = d.spacing;
+                hv.reverseArrangement = d.reverseArrangement;
+                hv.childControlWidth = d.childControlWidth;
+                hv.childControlHeight = d.childControlHeight;
+                hv.childScaleWidth = d.childScaleWidth;
+                hv.childScaleHeight = d.childScaleHeight;
+                hv.childForceExpandWidth = d.childForceExpandWidth;
+                hv.childForceExpandHeight = d.childForceExpandHeight;
+            }
+            else if (c is GridLayoutGroup g)
+            {
+                g.cellSize = d.cellSize;
+                g.spacing = d.gridSpacing;
+                g.startCorner = ParseEnum(d.startCorner, GridLayoutGroup.Corner.UpperLeft, "layoutGroup.startCorner", n.name, ctx);
+                g.startAxis = ParseEnum(d.startAxis, GridLayoutGroup.Axis.Horizontal, "layoutGroup.startAxis", n.name, ctx);
+                g.constraint = ParseEnum(d.constraint, GridLayoutGroup.Constraint.Flexible, "layoutGroup.constraint", n.name, ctx);
+                g.constraintCount = d.constraintCount;
+            }
+        }
+
+        private static void ApplyLayoutElement(GameObject go, UILayoutNode ln, LayoutNodeData n, BuildContext ctx)
+        {
+            var d = n.layoutElement;
+            var c = SyncOptional(go, ln, d != null ? typeof(LayoutElement) : null, LayoutElementKinds, ctx, n.name) as LayoutElement;
+            if (c == null || d == null) return;
+            c.ignoreLayout = d.ignoreLayout;
+            c.minWidth = d.minWidth;
+            c.minHeight = d.minHeight;
+            c.preferredWidth = d.preferredWidth;
+            c.preferredHeight = d.preferredHeight;
+            c.flexibleWidth = d.flexibleWidth;
+            c.flexibleHeight = d.flexibleHeight;
+            c.layoutPriority = d.layoutPriority;
+        }
+
+        private static void ApplyContentSizeFitter(GameObject go, UILayoutNode ln, LayoutNodeData n, BuildContext ctx)
+        {
+            var d = n.contentSizeFitter;
+            var c = SyncOptional(go, ln, d != null ? typeof(ContentSizeFitter) : null, FitterKinds, ctx, n.name) as ContentSizeFitter;
+            if (c == null || d == null) return;
+            c.horizontalFit = ParseEnum(d.horizontalFit, ContentSizeFitter.FitMode.Unconstrained, "contentSizeFitter.horizontalFit", n.name, ctx);
+            c.verticalFit = ParseEnum(d.verticalFit, ContentSizeFitter.FitMode.Unconstrained, "contentSizeFitter.verticalFit", n.name, ctx);
+        }
+
+        private static void ApplyMask(GameObject go, UILayoutNode ln, LayoutNodeData n, BuildContext ctx)
+        {
+            var d = n.mask;
+            Type desired = null;
+            if (d != null)
+            {
+                if (d.type == MaskData.TypeMask) desired = typeof(Mask);
+                else if (d.type == MaskData.TypeRectMask2D) desired = typeof(RectMask2D);
+                else Warn(ctx.result, $"Node \"{n.name}\": mask.type lạ \"{d.type}\", bỏ qua mask.");
+            }
+            var c = SyncOptional(go, ln, desired, MaskKinds, ctx, n.name);
+            if (c is Mask m && desired == typeof(Mask))
+            {
+                m.showMaskGraphic = d.showMaskGraphic;
+                if (go.GetComponent<Image>() == null)
+                    Warn(ctx.result, $"Node \"{n.name}\" có Mask nhưng không có Image cùng node: Mask không cắt được gì (dùng RectMask2D hoặc đổi node thành Image).");
+            }
         }
 
         private static void DestroyIfAny<T>(GameObject go) where T : Component
@@ -492,9 +653,17 @@ namespace UILayoutStudio.EditorTools
                 Warn(ctx.result, $"Node \"{n.name}\": không có sprite id \"{d.sprite}\", để ô màu trơn.");
             img.sprite = sprite;
             img.color = d.color;
-            img.type = d.type == "Sliced" ? Image.Type.Sliced : Image.Type.Simple;
+            img.type = d.type == "Sliced" ? Image.Type.Sliced : d.type == "Filled" ? Image.Type.Filled : Image.Type.Simple;
             img.preserveAspect = d.preserveAspect;
             img.raycastTarget = d.raycastTarget;
+            if (img.type == Image.Type.Filled)
+            {
+                // Gán fillMethod trước: setter của nó đặt lại fillOrigin về 0.
+                img.fillMethod = ParseEnum(d.fillMethod, Image.FillMethod.Radial360, "image.fillMethod", n.name, ctx);
+                img.fillOrigin = d.fillOrigin;
+                img.fillAmount = d.fillAmount;
+                img.fillClockwise = d.fillClockwise;
+            }
             if (img.type == Image.Type.Sliced && sprite != null && sprite.border == Vector4.zero)
                 Warn(ctx.result, $"Node \"{n.name}\" dùng Sliced nhưng sprite \"{sprite.name}\" không có border.");
         }
@@ -530,6 +699,7 @@ namespace UILayoutStudio.EditorTools
             tmp.fontSizeMax = d.fontSizeMax;
             tmp.lineSpacing = d.lineSpacing;
             tmp.characterSpacing = d.characterSpacing;
+            tmp.margin = d.margin;
         }
 
         private static TMP_FontAsset DefaultTmpFont()

@@ -20,7 +20,7 @@ using Object = UnityEngine.Object;
 
 namespace ULSVerify
 {
-    public static class ULSVerifyRunner
+    public static partial class ULSVerifyRunner
     {
         private const float Tol = 0.01f;
         private const string WorkDir = "VerifyData"; // trong thư mục project (ngoài Assets)
@@ -82,6 +82,11 @@ namespace ULSVerify
                 TestReimport(layoutJson, safeType);
                 TestSlicedSpriteAndText(safeType);
                 TestVersionReject(layoutJson);
+
+                var lgJson = File.ReadAllText(Path.Combine(fixtureDir, "layout_groups.json"));
+                var lgPrefab = TestLayoutGroupImport(lgJson, safeType);
+                TestLayoutGroupGeometry(lgPrefab, fixtureDir, HasArg("-ulsGenerateExpected"));
+                TestLayoutGroupReimport(lgJson, safeType);
             }
             catch (Exception e)
             {
@@ -119,6 +124,7 @@ namespace ULSVerify
                 $"playBtn rotation/scale = {play.localEulerAngles.z}, {play.localScale}");
             var gold = nodes.First(n => n.nodeId == "gold").GetComponent<TextMeshProUGUI>();
             Check(gold != null && gold.text == "Text" && Approx(gold.fontSize, 48), "gold là TextMeshProUGUI, text/fontSize đúng");
+            Check(gold != null && gold.margin == Vector4.zero, "gold: không có text.margin → TMP margin = Vector4.zero");
             var bg = nodes.First(n => n.nodeId == "bg").GetComponent<Image>();
             Check(bg != null && bg.sprite == null && bg.color == Color.white, "bg là Image ô màu (sprite null)");
             // Thứ tự sibling theo file.
@@ -372,13 +378,7 @@ namespace ULSVerify
         private static void TestSlicedSpriteAndText(string safeType)
         {
             Section("5. Sprite 9-slice và thuộc tính TextMeshPro");
-            var tex = new Texture2D(64, 48, TextureFormat.RGBA32, false);
-            var px = new Color32[64 * 48];
-            for (int i = 0; i < px.Length; i++) px[i] = new Color32((byte)(i % 64 * 4), (byte)(i / 64 * 5), 200, (byte)(i % 7 == 0 ? 128 : 255));
-            tex.SetPixels32(px);
-            tex.Apply();
-            var png = tex.EncodeToPNG();
-            Object.DestroyImmediate(tex);
+            var png = MakeSlicePng();
 
             string json = @"{
  ""format"": ""ui-layout-studio"", ""version"": 1, ""name"": ""SliceTest"",
@@ -395,7 +395,8 @@ namespace ULSVerify
            ""rect"": { ""anchorMin"": {""x"":0,""y"":1}, ""anchorMax"": {""x"":1,""y"":1}, ""pivot"": {""x"":0.5,""y"":1}, ""anchoredPosition"": {""x"":0,""y"":-10}, ""sizeDelta"": {""x"":-20,""y"":80}, ""rotation"": 0, ""scale"": {""x"":1,""y"":1} },
            ""text"": { ""content"": ""Xin chào"", ""font"": ""Kanit-SemiBold"", ""fontSize"": 40, ""color"": {""r"":1,""g"":0.8,""b"":0,""a"":1},
                      ""bold"": true, ""italic"": true, ""hAlign"": ""Right"", ""vAlign"": ""Top"", ""wrap"": false, ""autoSize"": true,
-                     ""fontSizeMin"": 20, ""fontSizeMax"": 60, ""lineSpacing"": 5, ""characterSpacing"": 2, ""unknownField"": 123 },
+                     ""fontSizeMin"": 20, ""fontSizeMax"": 60, ""lineSpacing"": 5, ""characterSpacing"": 2, ""unknownField"": 123,
+                     ""margin"": { ""left"": 3, ""top"": 4, ""right"": 5, ""bottom"": 6 } },
            ""children"": [] }
        ] }
    ] }
@@ -424,6 +425,7 @@ namespace ULSVerify
             Check(title.textWrappingMode == TextWrappingModes.NoWrap, "TMP wrap tắt");
             Check(title.enableAutoSizing && Approx(title.fontSizeMin, 20) && Approx(title.fontSizeMax, 60), "TMP autoSize 20..60");
             Check(Approx(title.lineSpacing, 5) && Approx(title.characterSpacing, 2), "TMP lineSpacing/characterSpacing");
+            Check(title.margin == new Vector4(3, 4, 5, 6), "TMP margin = " + title.margin + " (cần left 3, top 4, right 5, bottom 6 → Vector4(3,4,5,6))");
             Check(r.warnings.Any(w => w.Contains("Kanit-SemiBold")), "cảnh báo khi chưa ánh xạ font Kanit-SemiBold");
 
             // Bảng ánh xạ font: Kanit-SemiBold → một TMP_FontAsset có sẵn trong project (font mặc định của TMP).
@@ -437,6 +439,19 @@ namespace ULSVerify
             var title2 = r2.prefab.GetComponentsInChildren<UILayoutNode>(true).First(n => n.nodeId == "title").GetComponent<TextMeshProUGUI>();
             Check(title2.font == fontAsset && !r2.warnings.Any(w => w.Contains("Kanit-SemiBold")), "ánh xạ font Kanit-SemiBold → " + fontAsset.name + " qua UILayoutStudioSettings");
             Object.DestroyImmediate(settings);
+        }
+
+        /// <summary>PNG 64x48 tự sinh (dùng làm sprite 9-slice trong các bài test).</summary>
+        private static byte[] MakeSlicePng()
+        {
+            var tex = new Texture2D(64, 48, TextureFormat.RGBA32, false);
+            var px = new Color32[64 * 48];
+            for (int i = 0; i < px.Length; i++) px[i] = new Color32((byte)(i % 64 * 4), (byte)(i / 64 * 5), 200, (byte)(i % 7 == 0 ? 128 : 255));
+            tex.SetPixels32(px);
+            tex.Apply();
+            var png = tex.EncodeToPNG();
+            Object.DestroyImmediate(tex);
+            return png;
         }
 
         // ------------------------------------------------------------ 6. Từ chối version mới hơn
@@ -539,6 +554,8 @@ namespace ULSVerify
                 default: throw new ArgumentException("ToJson: kiểu lạ " + v.GetType());
             }
         }
+
+        private static bool HasArg(string name) => Environment.GetCommandLineArgs().Contains(name);
 
         private static string Arg(string name)
         {

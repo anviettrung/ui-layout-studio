@@ -9,7 +9,9 @@ param(
     [string]$NotchSolutionPath = $env:ULS_NOTCH_RUNTIME,
     [switch]$NoNotch,
     # Xoá project tạm và tạo lại từ đầu (lâu hơn vì phải dựng lại Library).
-    [switch]$Clean
+    [switch]$Clean,
+    # Để Unity ghi lại fixture\layout_groups_expected.json (đáp án hình học layout group) rồi kiểm như thường.
+    [switch]$GenerateExpected
 )
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -84,7 +86,9 @@ if ($code -ne 0) {
 Write-Host 'Unity: chạy kiểm chứng…'
 $report = Join-Path $ProjectPath 'VerifyData\report.txt'
 $runLog = Join-Path $logs 'uls-run.log'
-$code = Invoke-Unity 'ULSVerify.ULSVerifyRunner.Run' @('-ulsFixture', "`"$fixture`"", '-ulsReport', "`"$report`"") $runLog
+$runArgs = @('-ulsFixture', "`"$fixture`"", '-ulsReport', "`"$report`"")
+if ($GenerateExpected) { $runArgs += '-ulsGenerateExpected'; Write-Host 'Sinh lại fixture\layout_groups_expected.json bằng Unity.' }
+$code = Invoke-Unity 'ULSVerify.ULSVerifyRunner.Run' $runArgs $runLog
 if (Test-Path $report) {
     Get-Content $report -Encoding UTF8
 } else {

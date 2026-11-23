@@ -1,4 +1,12 @@
-import type { HAlign, ImageType, LayoutNode, RectTransformData, VAlign } from '../model/types'
+import type { FillMethod, HAlign, ImageType, LayoutNode, RectTransformData, VAlign } from '../model/types'
+
+const FILL_ORIGINS: Record<FillMethod, string[]> = {
+  Horizontal: ['Left', 'Right'],
+  Vertical: ['Bottom', 'Top'],
+  Radial90: ['BottomLeft', 'TopLeft', 'TopRight', 'BottomRight'],
+  Radial180: ['Bottom', 'Left', 'Top', 'Right'],
+  Radial360: ['Bottom', 'Right', 'Top', 'Left'],
+}
 import { fromOffsets, offsets, setAnchorsKeepRect, setPivotKeepRect } from '../model/layout'
 import { findNode } from '../model/tree'
 import { updateDoc, updateNode, useStore } from '../store'
@@ -6,6 +14,7 @@ import { useActiveLayout } from '../useLayout'
 import { AnchorPresets } from './AnchorPresets'
 import { Check, ColorField, Num, Row, Section } from './fields'
 import { SpriteInspector } from './Assets'
+import { LayoutComponents } from './LayoutComponents'
 
 export function Inspector() {
   const selection = useStore((s) => s.selection)
@@ -52,6 +61,7 @@ function NodeInspector({ node }: { node: LayoutNode }) {
       {!isRoot && node.type !== 'SafeArea' && <RectInspector node={node} />}
       {node.type === 'Image' && node.image && <ImageInspector node={node} />}
       {node.type === 'Text' && node.text && <TextInspector node={node} />}
+      {!isRoot && node.type !== 'SafeArea' && <LayoutComponents node={node} />}
     </div>
   )
 }
@@ -61,7 +71,10 @@ function RectInspector({ node }: { node: LayoutNode }) {
   const parentId = layout.parentOf.get(node.id)
   const parent = parentId ? layout.byId.get(parentId) : undefined
   const parentSize = parent ? { x: parent.local.width, y: parent.local.height } : { x: 0, y: 0 }
-  const rt = node.rect
+  const drv = layout.driven.get(node.id)
+  // Node bị layout điều khiển: hiện giá trị đã tính (như Unity), khoá phần bị điều khiển
+  const rt = drv ? layout.byId.get(node.id)?.node.rect ?? node.rect : node.rect
+  const lockPos = !!drv && (drv.position[0] || drv.position[1])
   const set = (r: RectTransformData, key: string) => updateNode(node.id, (n) => ({ ...n, rect: r }), { mergeKey: `${node.id}:${key}` })
   const stretchX = rt.anchorMin.x !== rt.anchorMax.x
   const stretchY = rt.anchorMin.y !== rt.anchorMax.y
@@ -71,6 +84,14 @@ function RectInspector({ node }: { node: LayoutNode }) {
   const sd = rt.sizeDelta
   return (
     <Section title="Rect Transform">
+      {drv && (
+        <div className="note driven-note">
+          Một số giá trị do <b>{drv.by}</b> điều khiển
+          {drv.size[0] || drv.size[1] ? ` (${[drv.position[0] || drv.size[0] ? 'ngang' : '', drv.position[1] || drv.size[1] ? 'dọc' : ''].filter(Boolean).join(', ')})` : ''}. Sửa ở
+          node cha hoặc LayoutElement.
+        </div>
+      )}
+      <div className={lockPos ? 'driven-lock' : ''}>
       <div className="rt-top">
         <AnchorPresets rt={rt} parentSize={parentSize} onChange={(r) => set(r, 'preset')} />
         <div className="rt-grid">
@@ -108,6 +129,7 @@ function RectInspector({ node }: { node: LayoutNode }) {
         <Num label="X" step={0.01} value={rt.pivot.x} onChange={(v) => set(setPivotKeepRect(rt, parentSize, { ...rt.pivot, x: v }), 'pivot')} />
         <Num label="Y" step={0.01} value={rt.pivot.y} onChange={(v) => set(setPivotKeepRect(rt, parentSize, { ...rt.pivot, y: v }), 'pivot')} />
       </Row>
+      </div>
       <Row label="Rotation Z">
         <Num value={rt.rotation} step={0.5} onChange={(v) => set({ ...rt, rotation: v }, 'rot')} />
       </Row>
@@ -149,11 +171,39 @@ function ImageInspector({ node }: { node: LayoutNode }) {
         <select value={img.type} onChange={(e) => set({ type: e.target.value as ImageType }, 'type')}>
           <option>Simple</option>
           <option>Sliced</option>
+          <option>Filled</option>
         </select>
         {img.type === 'Sliced' && sprite && sprite.border.every((b) => b === 0) && (
           <span className="warn">Sprite chưa có viền 9-slice</span>
         )}
       </Row>
+      {img.type === 'Filled' && (
+        <>
+          <Row label="Fill Method">
+            <select value={img.fillMethod ?? 'Radial360'} onChange={(e) => set({ fillMethod: e.target.value as FillMethod, fillOrigin: 0 }, 'fm')}>
+              {['Horizontal', 'Vertical', 'Radial90', 'Radial180', 'Radial360'].map((m) => (
+                <option key={m}>{m}</option>
+              ))}
+            </select>
+          </Row>
+          <Row label="Fill Origin">
+            <select value={img.fillOrigin ?? 0} onChange={(e) => set({ fillOrigin: Number(e.target.value) }, 'fo')}>
+              {FILL_ORIGINS[img.fillMethod ?? 'Radial360'].map((o, i) => (
+                <option key={o} value={i}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          </Row>
+          <Row label="Fill Amount">
+            <input type="range" min={0} max={1} step={0.01} value={img.fillAmount ?? 1} onChange={(e) => set({ fillAmount: Number(e.target.value) }, 'fa')} />
+            <span className="mono">{(img.fillAmount ?? 1).toFixed(2)}</span>
+          </Row>
+          {(img.fillMethod ?? 'Radial360').startsWith('Radial') && (
+            <Check label="Clockwise" checked={img.fillClockwise ?? true} onChange={(v) => set({ fillClockwise: v }, 'fc')} />
+          )}
+        </>
+      )}
       {img.type === 'Simple' && <Check label="Preserve Aspect" checked={img.preserveAspect} onChange={(v) => set({ preserveAspect: v }, 'pa')} />}
       <Check label="Raycast Target" checked={img.raycastTarget} onChange={(v) => set({ raycastTarget: v }, 'rc')} />
       {sprite && (

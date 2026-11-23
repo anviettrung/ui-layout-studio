@@ -92,3 +92,39 @@ describe('fixture', () => {
     }
   })
 })
+
+describe('layout group khớp Unity', () => {
+  it('110 node × 4 cỡ canvas so với đáp án do Unity tính', async () => {
+    const { readFileSync } = await import('node:fs')
+    const { applyUILayout } = await import('./uiLayout')
+    const doc = JSON.parse(readFileSync('unity-verify/fixture/layout_groups.json', 'utf8'))
+    const expected = JSON.parse(readFileSync('unity-verify/fixture/layout_groups_expected.json', 'utf8')) as {
+      canvasSize: { x: number; y: number }
+      nodes: Record<string, number[][]>
+    }[]
+    const sprites = Object.fromEntries(doc.sprites.map((s: { id: string }) => [s.id, s]))
+    let worst = 0
+    const bad: string[] = []
+    for (const c of expected) {
+      const frame = { scale: 1, size: c.canvasSize, safe: { x: 0, y: 0, width: c.canvasSize.x, height: c.canvasSize.y } }
+      const { root } = applyUILayout(doc.root, frame, { sprites, measureText: () => ({ width: 0, height: 0 }) })
+      const tree = resolveTree(root, frame)
+      const mats = worldMatrices(tree)
+      const visit = (r: ResolvedNode) => {
+        const exp = c.nodes[r.node.id]
+        if (exp) {
+          const got = cornersOf(mats.get(r.node.id)!, r.local)
+          got.forEach((p, i) => {
+            const d = Math.max(Math.abs(p.x - exp[i][0]), Math.abs(p.y - exp[i][1]))
+            worst = Math.max(worst, d)
+            if (d > 0.01 && bad.length < 20) bad.push(`${c.canvasSize.x}x${c.canvasSize.y} ${r.node.name} góc ${i}: ${p.x.toFixed(3)},${p.y.toFixed(3)} ≠ ${exp[i]}`)
+          })
+        }
+        r.children.forEach(visit)
+      }
+      visit(tree)
+    }
+    expect(bad, bad.join('\n')).toEqual([])
+    expect(worst).toBeLessThan(0.01)
+  })
+})
