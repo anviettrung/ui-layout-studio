@@ -1,3 +1,5 @@
+// Chụp một gói .uilayout.zip trên từng máy (canvas 100%) và ảnh chế độ Mọi máy.
+// Dùng: npm run build && DEVICES=16x9,iphonex,ipad node e2e/render.mjs <tệp zip> <thư mục ra>
 import { chromium } from 'playwright-core'
 import { preview } from 'vite'
 const [zip, outDir] = process.argv.slice(2)
