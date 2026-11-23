@@ -5,7 +5,8 @@ import {
   type CanvasFrame, type Mat, type Rect, type ResolvedNode,
 } from '../model/layout'
 import { createNode } from '../model/defaults'
-import type { DeviceProfile, LayoutNode, SpriteAsset, Vec2 } from '../model/types'
+import type { DeviceProfile, FontInfo, LayoutNode, SpriteAsset, Vec2 } from '../model/types'
+import { fontInfoOf } from '../model/fonts'
 import { applyUILayout, type LayoutResult } from '../model/uiLayout'
 import { measureText } from './measureText'
 import { findNode, insertNode } from '../model/tree'
@@ -22,9 +23,9 @@ interface Layout {
   parentOf: Map<string, string>
 }
 
-export function computeLayout(docRoot: LayoutNode, frame: CanvasFrame, sprites: Record<string, SpriteAsset>): Layout {
+export function computeLayout(docRoot: LayoutNode, frame: CanvasFrame, sprites: Record<string, SpriteAsset>, fontInfo?: Record<string, FontInfo>): Layout {
   // Chạy layout group / ContentSizeFitter như Unity cho đúng kích thước canvas của máy này
-  const { root, driven } = applyUILayout(docRoot, frame, { sprites, measureText })
+  const { root, driven } = applyUILayout(docRoot, frame, { sprites, measureText: (t, w) => measureText(t, w, fontInfoOf(fontInfo, t.font)) })
   const tree = resolveTree(root, frame)
   const mats = worldMatrices(tree)
   const byId = new Map<string, ResolvedNode>()
@@ -93,8 +94,8 @@ export function Viewport({ device, compact }: Props) {
   const fontsVersion = useStore((s) => s.fontsVersion)
   const sprites = useMemo(() => Object.fromEntries(doc.sprites.map((s) => [s.id, s])), [doc.sprites])
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const layout = useMemo(() => computeLayout(doc.root, frame, sprites), [doc.root, frame, sprites, fontsVersion])
-  const ctx: RenderCtx = useMemo(() => ({ sprites, images, interactive: true }), [sprites, images])
+  const layout = useMemo(() => computeLayout(doc.root, frame, sprites, doc.fontInfo), [doc.root, frame, sprites, fontsVersion, doc.fontInfo])
+  const ctx: RenderCtx = useMemo(() => ({ sprites, images, interactive: true, fontInfo: doc.fontInfo }), [sprites, images, doc.fontInfo])
 
   const pad = compact ? 8 : 40
   const fitScale = Math.max(0.02, Math.min((hostSize.w - pad * 2) / frame.size.x, (hostSize.h - pad * 2) / frame.size.y))

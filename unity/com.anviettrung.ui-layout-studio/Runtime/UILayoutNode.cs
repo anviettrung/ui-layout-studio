@@ -22,5 +22,10 @@ namespace UILayoutStudio
                  "RectMask2D) do chính importer thêm. Chỉ những component này bị gỡ khi layout không còn trường tương ứng; " +
                  "component cùng loại do dev tự thêm luôn được giữ.")]
         public List<string> managedComponents = new List<string>();
+
+        [Tooltip("Material importer gán cho TextMeshPro ở lần import gần nhất. Import lại chỉ đổi material của chữ khi " +
+                 "layout có trường materialPreset/faceDilate/outline/underlay hoặc chữ vẫn đang dùng đúng material này; " +
+                 "dev tự đổi material thì được giữ.")]
+        public Material managedMaterial;
     }
 }

@@ -15,6 +15,7 @@ namespace UILayoutStudio.EditorTools
     {
         public const string DefaultAssetPath = "Assets/Editor/UILayoutStudioSettings.asset";
         public const string DefaultSafeAreaType = "E7.NotchSolution.SafePadding";
+        public const string DefaultTmpMaterialFolder = "Assets/UI/_TMPMaterials";
 
         [Serializable]
         public sealed class FontMapping
@@ -35,6 +36,9 @@ namespace UILayoutStudio.EditorTools
 
         [Tooltip("Đường dẫn prefab mặc định. {name} = tên layout.")]
         public string prefabPathTemplate = "Assets/UI/{name}/{name}.prefab";
+
+        [Tooltip("Thư mục chứa material preset TextMeshPro do importer tạo (viền, bóng, dilate). Dùng chung mọi layout.")]
+        public string tmpMaterialFolder = DefaultTmpMaterialFolder;
 
         [Tooltip("Không có ánh xạ thì thử tìm TMP_FontAsset tên '<font>' hoặc '<font> SDF' trong project.")]
         public bool autoFindFontByName = true;

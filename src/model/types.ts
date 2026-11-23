@@ -86,6 +86,27 @@ export interface TextData {
   characterSpacing: number
   /** TMP_Text.margin */
   margin?: { left: number; top: number; right: number; bottom: number }
+  /** Tên material preset của TMP trong Unity (vd "... SDF Outline Black Thin Material") */
+  materialPreset?: string
+  /** _FaceDilate, -1..1 */
+  faceDilate?: number
+  /** _OutlineWidth (0..1) + _OutlineColor; thiếu = không viền */
+  outline?: { width: number; color: Color }
+  /** bóng chữ (underlay) */
+  underlay?: { color: Color; offsetX: number; offsetY: number; dilate: number; softness: number }
+}
+
+/** Thông số SDF của font TMP: dùng để quy đổi độ dày viền ra pixel */
+export interface FontInfo {
+  pointSize: number
+  padding: number
+  /** TMP_FontAsset.normalSpacingOffset / boldSpacing (em/100, cộng vào mỗi ký tự) */
+  normalSpacing: number
+  boldSpacing: number
+  /** font asset có bảng kerning không */
+  kerning: boolean
+  /** faceInfo.lineHeight / pointSize (em): khoảng cách giữa hai dòng */
+  lineHeight?: number
 }
 
 export type TextAnchor =
@@ -158,6 +179,7 @@ export interface LayoutDocument {
   name: string
   canvas: CanvasSettings
   sprites: SpriteAsset[]
+  fontInfo?: Record<string, FontInfo>
   /** Node gốc tương ứng Canvas, luôn kéo giãn toàn màn. */
   root: LayoutNode
 }

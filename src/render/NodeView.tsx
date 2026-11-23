@@ -2,11 +2,13 @@
 // xoay/scale quanh pivot, nên CSS ghép biến đổi giống hệt hierarchy của Unity.
 import { memo, useLayoutEffect, useReducer, useRef, type CSSProperties } from 'react'
 import type { ResolvedNode } from '../model/layout'
-import type { Color, ImageData, LayoutNode, SpriteAsset, TextData } from '../model/types'
+import type { Color, FontInfo, ImageData, LayoutNode, SpriteAsset, TextData } from '../model/types'
 import type { SpriteImage } from '../store'
 import { tintedUrl } from './tint'
+import { cssFontFamily, fontInfoOf, letterSpacingEm } from '../model/fonts'
 
 export interface RenderCtx {
+  fontInfo?: Record<string, FontInfo>
   sprites: Record<string, SpriteAsset>
   images: Record<string, SpriteImage>
   interactive: boolean
@@ -45,7 +47,7 @@ export const NodeView = memo(function NodeView({ r, ctx, locked, isRoot }: Props
   return (
     <div className="node" data-node-id={node.id} data-selectable={selectable ? '1' : undefined} style={style}>
       {node.type === 'Image' && node.image && !(node.mask?.type === 'Mask' && !node.mask.showMaskGraphic) && <ImageView img={node.image} ctx={ctx} />}
-      {node.type === 'Text' && node.text && <TextView t={node.text} />}
+      {node.type === 'Text' && node.text && <TextView t={node.text} info={fontInfoOf(ctx.fontInfo, node.text.font)} />}
       {r.children.map((c) => (
         <NodeView key={c.node.id} r={c} ctx={ctx} locked={lock} />
       ))}
@@ -150,7 +152,32 @@ function ImageView({ img, ctx }: { img: ImageData; ctx: RenderCtx }) {
 const H = { Left: 'left', Center: 'center', Right: 'right' } as const
 const V = { Top: 'flex-start', Middle: 'center', Bottom: 'flex-end' } as const
 
-function TextView({ t }: { t: TextData }) {
+
+/**
+ * Viền/bóng của TMP (shader SDF) quy ra CSS. Một đơn vị SDF ứng với (padding / pointSize) em:
+ * mép ngoài viền lùi ra (faceDilate + outlineWidth) đơn vị, mặt chữ phình (faceDilate - outlineWidth).
+ * Dùng -webkit-text-stroke với paint-order: stroke nằm dưới mặt chữ nên chỉ nửa ngoài hiện ra.
+ */
+export function tmpEffects(t: TextData, info: FontInfo): CSSProperties {
+  const unit = info.padding / info.pointSize
+  const fd = t.faceDilate ?? 0
+  const ow = t.outline && t.outline.width > 0 ? t.outline.width : 0
+  const st: CSSProperties = {}
+  if (ow > 0) {
+    const out = Math.max(0, fd + ow) * unit
+    if (out > 0) Object.assign(st, { WebkitTextStroke: `${(out * 2).toFixed(4)}em ${css(t.outline!.color)}`, paintOrder: 'stroke fill' })
+  } else if (fd > 0) {
+    Object.assign(st, { WebkitTextStroke: `${(fd * unit * 2).toFixed(4)}em ${css(t.color)}`, paintOrder: 'stroke fill' })
+  }
+  const u = t.underlay
+  if (u && u.color.a > 0) {
+    const g = (info.padding + 1) / info.pointSize
+    st.textShadow = `${(u.offsetX * g).toFixed(4)}em ${(-u.offsetY * g).toFixed(4)}em ${(Math.max(0, u.softness) * unit * 2).toFixed(4)}em ${css(u.color)}`
+  }
+  return st
+}
+
+function TextView({ t, info }: { t: TextData; info: FontInfo }) {
   const ref = useRef<HTMLDivElement>(null)
   const inner = useRef<HTMLDivElement>(null)
   // Auto size: tìm cỡ chữ lớn nhất vừa khung (như TMP enableAutoSizing).
@@ -181,7 +208,7 @@ function TextView({ t }: { t: TextData }) {
         ref={inner}
         style={{
           width: '100%',
-          fontFamily: `"${t.font}", sans-serif`,
+          fontFamily: cssFontFamily(t.font),
           fontSize: t.fontSize,
           color: css(t.color),
           fontWeight: t.bold ? 700 : 400,
@@ -189,8 +216,10 @@ function TextView({ t }: { t: TextData }) {
           textAlign: H[t.hAlign],
           whiteSpace: t.wrap ? 'pre-wrap' : 'pre',
           overflowWrap: t.wrap ? 'break-word' : 'normal',
-          lineHeight: 1.25 + t.lineSpacing / 100,
-          letterSpacing: `${t.characterSpacing / 100}em`,
+          lineHeight: (info.lineHeight ?? 1.25) + t.lineSpacing / 100,
+          letterSpacing: `${letterSpacingEm(t.characterSpacing, t.bold, info)}em`,
+          fontKerning: info.kerning ? 'auto' : 'none',
+          ...tmpEffects(t, info),
         }}
       >
         {t.content}

@@ -13,7 +13,7 @@ export function useActiveLayout() {
   return useMemo(() => {
     const frame = canvasFrame(doc.canvas, deviceScreen(device, doc.canvas))
     const sprites = Object.fromEntries(doc.sprites.map((s) => [s.id, s]))
-    return computeLayout(doc.root, frame, sprites)
+    return computeLayout(doc.root, frame, sprites, doc.fontInfo)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [doc.root, doc.canvas, doc.sprites, device, fontsVersion])
+  }, [doc.root, doc.canvas, doc.sprites, doc.fontInfo, device, fontsVersion])
 }

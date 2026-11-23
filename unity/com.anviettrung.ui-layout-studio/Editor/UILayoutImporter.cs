@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -286,6 +287,10 @@ namespace UILayoutStudio.EditorTools
             public Dictionary<string, GameObject> index;
             public readonly HashSet<GameObject> matched = new HashSet<GameObject>();
             public readonly Dictionary<string, TMP_FontAsset> fontCache = new Dictionary<string, TMP_FontAsset>();
+            /// <summary>(tên preset, font) → material, null = không có material dùng được.</summary>
+            public readonly Dictionary<(string, TMP_FontAsset), Material> presetCache = new Dictionary<(string, TMP_FontAsset), Material>();
+            /// <summary>Tên asset preset tự tạo → material.</summary>
+            public readonly Dictionary<string, Material> generatedCache = new Dictionary<string, Material>();
         }
 
         private static void Build(GameObject root, BuildContext ctx)
@@ -700,6 +705,203 @@ namespace UILayoutStudio.EditorTools
             tmp.lineSpacing = d.lineSpacing;
             tmp.characterSpacing = d.characterSpacing;
             tmp.margin = d.margin;
+            // Sau khi gán font: đổi font làm TMP đặt lại material.
+            ApplyTextMaterial(tmp, go.GetComponent<UILayoutNode>(), d, n.name, ctx);
+        }
+
+        // ---------------------------------------------------------------- Material TMP (viền, bóng)
+
+        /// <summary>
+        /// Gán fontSharedMaterial theo materialPreset / faceDilate / outline / underlay (docs/FORMAT.md). File không có
+        /// trường nào thì chỉ đổi material khi chữ đang dùng material importer gán lần trước hoặc material mặc định của
+        /// font; material dev tự gán được giữ.
+        /// </summary>
+        private static void ApplyTextMaterial(TextMeshProUGUI tmp, UILayoutNode ln, LayoutText d, string nodeName, BuildContext ctx)
+        {
+            var font = tmp.font;
+            if (font == null || ln == null) return;
+            var current = tmp.fontSharedMaterial;
+            bool ours = current == null || current == ln.managedMaterial || current == font.material;
+            if (!d.hasMaterialFields && !ours) return; // dev đã tự đổi material, file không nói gì về material
+
+            Material desired = null;
+            if (d.materialPreset != null)
+            {
+                desired = FindPresetMaterial(d.materialPreset, font, ctx);
+                if (desired == null)
+                    Warn(ctx.result, $"Node \"{nodeName}\": không tìm thấy material preset \"{d.materialPreset}\" dùng được với font {font.name}" +
+                                     (d.HasNonDefaultMaterialParams ? ", tạo/dùng preset theo thông số viền/bóng." : ", dùng material mặc định của font."));
+            }
+            if (desired == null && d.HasNonDefaultMaterialParams) desired = GetOrCreateGeneratedPreset(font, d, nodeName, ctx);
+            if (desired == null) desired = font.material;
+            if (desired == null) return;
+
+            if (current != desired) tmp.fontSharedMaterial = desired;
+            ln.managedMaterial = desired;
+        }
+
+        private static bool UsableWithFont(Material m, TMP_FontAsset font)
+        {
+            if (m == null || font == null || !m.HasProperty("_MainTex")) return false;
+            var tex = m.GetTexture("_MainTex");
+            if (tex == null) return false;
+            if (font.atlasTexture == tex) return true;
+            var atlases = font.atlasTextures;
+            if (atlases != null) foreach (var a in atlases) if (a == tex) return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Tìm material tên đúng <paramref name="name"/> dùng được với font (_MainTex là atlas của font). Tìm cả material
+        /// mặc định của font, material asset riêng và material là sub-asset của font asset.
+        /// </summary>
+        private static Material FindPresetMaterial(string name, TMP_FontAsset font, BuildContext ctx)
+        {
+            if (ctx.presetCache.TryGetValue((name, font), out var cached)) return cached;
+            Material found = null, wrongAtlas = null;
+            void Consider(Material m)
+            {
+                if (found != null || m == null || m.name != name) return;
+                if (UsableWithFont(m, font)) found = m;
+                else if (wrongAtlas == null) wrongAtlas = m;
+            }
+
+            Consider(font.material);
+            if (found == null)
+            {
+                var fontPath = AssetDatabase.GetAssetPath(font);
+                if (!string.IsNullOrEmpty(fontPath))
+                    foreach (var o in AssetDatabase.LoadAllAssetsAtPath(fontPath)) Consider(o as Material);
+            }
+            if (found == null)
+            {
+                var seen = new HashSet<string>();
+                foreach (var g in AssetDatabase.FindAssets("t:Material " + name))
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(g);
+                    if (!seen.Add(path)) continue;
+                    foreach (var o in AssetDatabase.LoadAllAssetsAtPath(path)) Consider(o as Material);
+                    if (found != null) break;
+                }
+            }
+            if (found == null)
+            {
+                // Bộ lọc tên của FindAssets tách từ theo khoảng trắng/ký tự đặc biệt nên có thể sót: so tên tệp mọi material.
+                foreach (var g in AssetDatabase.FindAssets("t:Material"))
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(g);
+                    if (Path.GetFileNameWithoutExtension(path) == name) Consider(AssetDatabase.LoadAssetAtPath<Material>(path));
+                    if (found != null) break;
+                }
+            }
+            if (found == null)
+            {
+                // Material là sub-asset của font asset khác cùng atlas (FindAssets theo tên không luôn thấy sub-asset).
+                foreach (var g in AssetDatabase.FindAssets("t:TMP_FontAsset"))
+                {
+                    foreach (var o in AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GUIDToAssetPath(g))) Consider(o as Material);
+                    if (found != null) break;
+                }
+            }
+            if (found == null && wrongAtlas != null)
+                Warn(ctx.result, $"Material \"{name}\" ({AssetDatabase.GetAssetPath(wrongAtlas)}) không dùng atlas của font {font.name}, không gán được.");
+            ctx.presetCache[(name, font)] = found;
+            return found;
+        }
+
+        private static string F4(float v) => Math.Round(v, 4).ToString("0.####", CultureInfo.InvariantCulture);
+        private static string C4(Color c) => F4(c.r) + "," + F4(c.g) + "," + F4(c.b) + "," + F4(c.a);
+
+        /// <summary>Khoá tất định của bộ thông số (làm tròn 4 chữ số), dùng để đặt tên preset tự tạo.</summary>
+        public static string MaterialParamsKey(LayoutText d)
+        {
+            var sb = new StringBuilder();
+            sb.Append("dilate=").Append(F4(d.faceDilate));
+            if (d.outline != null && d.outline.width > 0)
+                sb.Append(";outline=").Append(F4(d.outline.width)).Append('|').Append(C4(d.outline.color));
+            if (d.underlay != null)
+                sb.Append(";underlay=").Append(C4(d.underlay.color)).Append('|').Append(F4(d.underlay.offsetX)).Append('|')
+                  .Append(F4(d.underlay.offsetY)).Append('|').Append(F4(d.underlay.dilate)).Append('|').Append(F4(d.underlay.softness));
+            return sb.ToString();
+        }
+
+        /// <summary>Tên asset preset tự tạo: "&lt;tên font asset&gt; ULS &lt;8 hex&gt;", hash FNV-1a từ GUID font + thông số.</summary>
+        public static string GeneratedPresetName(TMP_FontAsset font, LayoutText d)
+        {
+            string guid = null;
+            long localId = 0;
+            if (!AssetDatabase.TryGetGUIDAndLocalFileIdentifier(font, out guid, out localId)) guid = font.name;
+            var key = guid + ":" + localId.ToString(CultureInfo.InvariantCulture) + "|" + MaterialParamsKey(d);
+            uint h = 2166136261;
+            foreach (var b in Encoding.UTF8.GetBytes(key)) { h ^= b; h *= 16777619; }
+            return UILayoutStudioSettings.SanitizeFileName(font.name) + " ULS " + h.ToString("x8");
+        }
+
+        private static Material GetOrCreateGeneratedPreset(TMP_FontAsset font, LayoutText d, string nodeName, BuildContext ctx)
+        {
+            if (font.material == null)
+            {
+                Warn(ctx.result, $"Node \"{nodeName}\": font {font.name} không có material mặc định, không tạo được preset viền/bóng.");
+                return null;
+            }
+            var name = GeneratedPresetName(font, d);
+            if (ctx.generatedCache.TryGetValue(name, out var cached) && cached != null) return cached;
+
+            var folder = (string.IsNullOrWhiteSpace(ctx.settings.tmpMaterialFolder) ? UILayoutStudioSettings.DefaultTmpMaterialFolder
+                : ctx.settings.tmpMaterialFolder.Trim()).Replace('\\', '/').TrimEnd('/');
+            if (!folder.StartsWith("Assets"))
+            {
+                Warn(ctx.result, $"Thư mục material TMP phải nằm trong Assets/: {folder}. Dùng {UILayoutStudioSettings.DefaultTmpMaterialFolder}.");
+                folder = UILayoutStudioSettings.DefaultTmpMaterialFolder;
+            }
+            var path = folder + "/" + name + ".mat";
+            var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (mat != null && !UsableWithFont(mat, font))
+            {
+                // Atlas của font đã đổi (vd dựng lại font asset): trỏ lại atlas, giữ nguyên asset và GUID.
+                mat.SetTexture("_MainTex", font.atlasTexture);
+                EditorUtility.SetDirty(mat);
+            }
+            if (mat == null)
+            {
+                EnsureFolder(folder);
+                mat = new Material(font.material) { name = name };
+                SetMaterialParams(mat, d);
+                AssetDatabase.CreateAsset(mat, path);
+                Debug.Log(LogPrefix + $"Tạo material preset {path} ({MaterialParamsKey(d)}).");
+            }
+            ctx.generatedCache[name] = mat;
+            return mat;
+        }
+
+        private static void SetMaterialParams(Material m, LayoutText d)
+        {
+            void SetF(string p, float v) { if (m.HasProperty(p)) m.SetFloat(p, v); }
+            void SetC(string p, Color v) { if (m.HasProperty(p)) m.SetColor(p, v); }
+            void Keyword(string k, bool on) { if (on) m.EnableKeyword(k); else m.DisableKeyword(k); }
+
+            SetF("_FaceDilate", d.faceDilate);
+
+            bool outline = d.outline != null && d.outline.width > 0;
+            SetF("_OutlineWidth", outline ? d.outline.width : 0);
+            if (outline) SetC("_OutlineColor", d.outline.color);
+            Keyword(ShaderUtilities.Keyword_Outline, outline);
+
+            bool underlay = d.underlay != null;
+            if (underlay)
+            {
+                SetC("_UnderlayColor", d.underlay.color);
+                SetF("_UnderlayOffsetX", d.underlay.offsetX);
+                SetF("_UnderlayOffsetY", d.underlay.offsetY);
+                SetF("_UnderlayDilate", d.underlay.dilate);
+                SetF("_UnderlaySoftness", d.underlay.softness);
+            }
+            Keyword(ShaderUtilities.Keyword_Underlay, underlay);
+            Keyword("UNDERLAY_INNER", false);
+
+            // Tỉ lệ _ScaleRatioA/B/C để TMP tính padding đúng với viền/bóng.
+            try { ShaderUtilities.UpdateShaderRatios(m); }
+            catch (Exception e) { Debug.LogWarning(LogPrefix + "UpdateShaderRatios lỗi: " + e.Message); }
         }
 
         private static TMP_FontAsset DefaultTmpFont()

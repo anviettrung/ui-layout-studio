@@ -53,6 +53,14 @@ Tham số (đều có mặc định):
    - **9.** Import lại: file bỏ/đổi layoutGroup, layoutElement, mask, contentSizeFitter → chỉ gỡ/thay component importer đã
      thêm; LayoutElement, layout group, RectMask2D dev tự thêm được giữ; component dev có sẵn được dùng lại khi file thêm
      trường cùng loại; Mask trên node không có Image thì cảnh báo.
+   - **10.** Material TextMeshPro (`text.materialPreset`, `faceDilate`, `outline`, `underlay`; layout dựng trong
+     `ULSVerifyTextMaterial.cs`, font mặc định TMP và một bản chép đổi sang shader Mobile SDF): (a) preset có sẵn được
+     gán, kể cả khi có material trùng tên dùng atlas khác (chọn bản đúng atlas) và preset là sub-asset của font asset;
+     (b) preset không tồn tại + thông số → cảnh báo, tạo preset mới trong `Assets/UI/_TMPMaterials`; (c) nhiều chữ cùng
+     font + thông số dùng chung một asset; (d) chỉ thông số không preset, font khác ra preset riêng; kiểm từng property
+     (`_FaceDilate`, `_OutlineWidth/Color`, `_Underlay*`) và keyword `OUTLINE_ON`/`UNDERLAY_ON`; (e) import lần hai không
+     tạo asset mới, GUID giữ nguyên; (f) dev đổi material trên chữ không có trường material → giữ, trên chữ có preset →
+     gán lại theo file; file bỏ trường trên chữ importer quản lý → về material mặc định của font.
 
 `fixture/layout.json` và `fixture/expected.json` do web editor sinh (`src/model/fixture.ts`), không sửa tay.
 

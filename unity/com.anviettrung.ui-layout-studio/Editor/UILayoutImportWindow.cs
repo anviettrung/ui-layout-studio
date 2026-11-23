@@ -159,6 +159,7 @@ namespace UILayoutStudio.EditorTools
             EditorGUILayout.LabelField(" ", t != null ? "✓ " + t.AssemblyQualifiedName.Split(',')[0] + " (" + t.Assembly.GetName().Name + ")" : "✗ không tìm thấy, SafeArea chỉ kéo giãn", EditorStyles.miniLabel);
             EditorGUILayout.PropertyField(settingsSO.FindProperty(nameof(UILayoutStudioSettings.spriteFolderTemplate)), new GUIContent("Mẫu thư mục sprite"));
             EditorGUILayout.PropertyField(settingsSO.FindProperty(nameof(UILayoutStudioSettings.prefabPathTemplate)), new GUIContent("Mẫu đường dẫn prefab"));
+            EditorGUILayout.PropertyField(settingsSO.FindProperty(nameof(UILayoutStudioSettings.tmpMaterialFolder)), new GUIContent("Thư mục material TMP"));
             EditorGUILayout.PropertyField(settingsSO.FindProperty(nameof(UILayoutStudioSettings.autoFindFontByName)), new GUIContent("Tự tìm font theo tên"));
             EditorGUILayout.PropertyField(settingsSO.FindProperty(nameof(UILayoutStudioSettings.fonts)), new GUIContent("Ánh xạ font"), true);
             settingsSO.ApplyModifiedProperties();

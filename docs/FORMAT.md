@@ -170,3 +170,38 @@ Editor tính layout group theo đúng thuật toán của uGUI (LayoutRebuilder:
 đặt vị trí từ trên xuống, trục ngang trước rồi trục dọc). Phần bị layout group hoặc ContentSizeFitter điều khiển
 được tính lại cho từng máy khi hiển thị, không ghi đè `rect` trong file; Unity cũng tự tính lại khi chạy, nên giá trị
 lưu trong `rect` ở các trục bị điều khiển không ảnh hưởng kết quả.
+
+## Viền, bóng chữ: material của TextMeshPro (bổ sung v1, trường tuỳ chọn)
+
+TMP tạo viền và bóng bằng material (shader SDF). Dự án thường dùng **material preset** dùng chung
+(vd `Kanit-SemiBold SDF Outline Black Thin Material`) để không vỡ batching. Node Text thêm:
+
+```jsonc
+"text": {
+  "materialPreset": "Kanit-SemiBold SDF Outline Black Thin Material", // tên material preset trong Unity, tuỳ chọn
+  "faceDilate": 0.2,                                     // _FaceDilate, -1..1
+  "outline": { "width": 0.2, "color": { "r": 0, "g": 0, "b": 0, "a": 1 } },   // _OutlineWidth 0..1, _OutlineColor; thiếu = không viền
+  "underlay": {                                          // bóng: _UnderlayColor, _UnderlayOffsetX/Y (-1..1), _UnderlayDilate, _UnderlaySoftness
+    "color": { "r": 0, "g": 0, "b": 0, "a": 0.5 }, "offsetX": 0.5, "offsetY": -0.5, "dilate": 0, "softness": 0
+  }
+}
+```
+
+- Có `materialPreset` và Unity có material trùng tên (dùng được với font của chữ đó) thì importer gán preset đó.
+  Các thông số đi kèm chỉ để web vẽ cho giống.
+- Không có preset (hoặc không tìm thấy) mà có viền/bóng/dilate khác mặc định thì importer tìm hoặc tạo một preset
+  dùng chung cho đúng bộ thông số đó (cùng font + cùng thông số = cùng một material), không tạo material riêng cho từng chữ.
+
+Tài liệu thêm (tuỳ chọn) thông số của font asset để web vẽ giống TMP (độ dày viền, khoảng cách chữ, khoảng cách dòng).
+Web không có font tên như asset biến thể (vd `Kanit-SemiBold Chat`) thì dùng tên trước dấu cách (`Kanit-SemiBold`):
+
+```jsonc
+"fontInfo": {
+  "Kanit-SemiBold": {
+    "pointSize": 64, "padding": 10,          // faceInfo.pointSize, atlasPadding
+    "normalSpacing": -5, "boldSpacing": 7,   // normalSpacingOffset, boldSpacing (em/100 mỗi ký tự)
+    "kerning": false,                        // font asset có cặp kerning không
+    "lineHeight": 1.495                      // faceInfo.lineHeight / pointSize (em)
+  }
+}
+```

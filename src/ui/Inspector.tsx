@@ -15,6 +15,7 @@ import { AnchorPresets } from './AnchorPresets'
 import { Check, ColorField, Num, Row, Section } from './fields'
 import { SpriteInspector } from './Assets'
 import { LayoutComponents } from './LayoutComponents'
+import { TextMaterialSection } from './TextMaterial'
 
 export function Inspector() {
   const selection = useStore((s) => s.selection)
@@ -61,6 +62,7 @@ function NodeInspector({ node }: { node: LayoutNode }) {
       {!isRoot && node.type !== 'SafeArea' && <RectInspector node={node} />}
       {node.type === 'Image' && node.image && <ImageInspector node={node} />}
       {node.type === 'Text' && node.text && <TextInspector node={node} />}
+      {node.type === 'Text' && node.text && <TextMaterialSection node={node} />}
       {!isRoot && node.type !== 'SafeArea' && <LayoutComponents node={node} />}
     </div>
   )

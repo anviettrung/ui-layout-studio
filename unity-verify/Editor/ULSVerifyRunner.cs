@@ -87,6 +87,7 @@ namespace ULSVerify
                 var lgPrefab = TestLayoutGroupImport(lgJson, safeType);
                 TestLayoutGroupGeometry(lgPrefab, fixtureDir, HasArg("-ulsGenerateExpected"));
                 TestLayoutGroupReimport(lgJson, safeType);
+                TestTextMaterial(safeType);
             }
             catch (Exception e)
             {

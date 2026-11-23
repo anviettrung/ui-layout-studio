@@ -1,6 +1,7 @@
 // Đo chữ trên trình duyệt để thay cho TMP preferredWidth/Height khi chạy layout group.
 // TMP: một dòng cao (ascender - descender) của font; các dòng sau cách nhau lineHeight + lineSpacing.
-import type { TextData } from '../model/types'
+import type { FontInfo, TextData } from '../model/types'
+import { DEFAULT_FONT_INFO, cssFontFamily, letterSpacingEm } from '../model/fonts'
 
 let ctx: CanvasRenderingContext2D | null = null
 const cache = new Map<string, { width: number; height: number }>()
@@ -15,29 +16,30 @@ export function resetTextMeasureCache() {
   cache.clear()
 }
 
-export function measureText(t: TextData, width: number | null): { width: number; height: number } {
+export function measureText(t: TextData, width: number | null, info: FontInfo = DEFAULT_FONT_INFO): { width: number; height: number } {
   // TMP: preferred size = chữ + margin; ngắt dòng trong bề rộng đã trừ margin
   const mg = t.margin ?? { left: 0, top: 0, right: 0, bottom: 0 }
-  const inner = measureInner(t, width === null ? null : width - mg.left - mg.right)
+  const inner = measureInner(t, width === null ? null : width - mg.left - mg.right, info)
   return { width: inner.width + mg.left + mg.right, height: inner.height + mg.top + mg.bottom }
 }
 
-function measureInner(t: TextData, width: number | null): { width: number; height: number } {
-  const key = `${t.font}|${t.fontSize}|${t.bold}|${t.italic}|${t.characterSpacing}|${t.lineSpacing}|${width === null ? '-' : width.toFixed(2)}|${t.content}`
+function measureInner(t: TextData, width: number | null, info: FontInfo): { width: number; height: number } {
+  const key = `${info.lineHeight}|${info.normalSpacing}|${info.boldSpacing}|${info.kerning}|${t.font}|${t.fontSize}|${t.bold}|${t.italic}|${t.characterSpacing}|${t.lineSpacing}|${width === null ? '-' : width.toFixed(2)}|${t.content}`
   const hit = cache.get(key)
   if (hit) return hit
   if (t.content === '') return { width: 0, height: 0 }
   const g = c2d()
   const size = t.fontSize
-  g.font = `${t.italic ? 'italic ' : ''}${t.bold ? 700 : 400} ${size}px "${t.font}", sans-serif`
-  const spacing = (t.characterSpacing / 100) * size
+  g.font = `${t.italic ? 'italic ' : ''}${t.bold ? 700 : 400} ${size}px ${cssFontFamily(t.font)}`
+  const spacing = letterSpacingEm(t.characterSpacing, t.bold, info) * size
+  g.fontKerning = info.kerning ? 'auto' : 'none'
   const measure = (s: string) => {
     if (!s) return 0
     return g.measureText(s).width + spacing * Math.max(0, [...s].length - 1)
   }
   const m = g.measureText('Hg')
   const ascDesc = (m.fontBoundingBoxAscent ?? size * 0.8) + (m.fontBoundingBoxDescent ?? size * 0.2)
-  const lineStep = ascDesc + (t.lineSpacing / 100) * size
+  const lineStep = (info.lineHeight !== undefined ? info.lineHeight * size : ascDesc) + (t.lineSpacing / 100) * size
 
   const paragraphs = t.content.split('\n')
   let maxW = 0

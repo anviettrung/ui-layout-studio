@@ -41,6 +41,7 @@ tìm theo type):
 | Tự tìm font theo tên | Chưa ánh xạ thì tìm `TMP_FontAsset` tên `<font>` hoặc `<font> SDF` (vd `Kanit-SemiBold SDF`). Không thấy thì dùng font mặc định TMP và cảnh báo. |
 | Component safe area | Mặc định `E7.NotchSolution.SafePadding`. Không tìm thấy type thì cảnh báo, node SafeArea vẫn được tạo (kéo giãn toàn cha). |
 | Mẫu thư mục sprite / prefab | `{name}` = tên layout. |
+| Thư mục material TMP | Nơi lưu material preset viền/bóng do importer tạo, mặc định `Assets/UI/_TMPMaterials`, dùng chung mọi layout. |
 
 Chưa có asset cài đặt thì importer dùng giá trị mặc định ở bảng trên.
 
@@ -57,7 +58,11 @@ thư mục sprite và type safe area. Import lại bằng một trong các cách
 Quy tắc khi import lại (khớp node theo `UILayoutNode.nodeId`):
 
 - Node có trong file: chỉ ghi đè các giá trị có trong `layout.json` (RectTransform, tên, active, thuộc tính Image/TMP
-  trong định dạng, thứ tự sibling). Thuộc tính khác (material, `pixelsPerUnitMultiplier`, raycast padding…) giữ nguyên.
+  trong định dạng, thứ tự sibling). Thuộc tính khác (`pixelsPerUnitMultiplier`, raycast padding…) giữ nguyên.
+- Material của chữ: importer ghi material nó gán vào `UILayoutNode.managedMaterial`. File có `materialPreset`,
+  `faceDilate`, `outline` hoặc `underlay` thì material luôn được gán theo file. File không có các trường này thì chỉ đổi
+  material khi chữ đang dùng material importer gán lần trước hoặc material mặc định của font; dev tự gán material khác
+  thì giữ nguyên.
 - Node mới: tạo mới.
 - Node bị xoá khỏi file: xoá GameObject. GameObject dev tự thêm bên dưới (không có `UILayoutNode`) được chuyển lên cha
   gần nhất còn tồn tại, giữ vị trí world, kèm cảnh báo trong Console.
@@ -82,6 +87,7 @@ Quy tắc khi import lại (khớp node theo `UILayoutNode.nodeId`):
 | `Image` | `Image`: sprite (null = ô màu), color, type Simple/Sliced/Filled, preserveAspect, raycastTarget |
 | `image.type = "Filled"` | `Image.Type.Filled`, `fillMethod` (`Image.FillMethod` cùng tên), `fillOrigin`, `fillAmount`, `fillClockwise` |
 | `Text` | `TextMeshProUGUI`: text, font (qua bảng ánh xạ), fontSize, color, Bold/Italic, `horizontalAlignment` + `verticalAlignment`, `textWrappingMode` (Normal/NoWrap), autoSize + min/max, lineSpacing, characterSpacing, `margin` (left, top, right, bottom → `Vector4(x, y, z, w)`) |
+| `text.materialPreset`, `faceDilate`, `outline`, `underlay` | `TextMeshProUGUI.fontSharedMaterial` (xem mục *Viền, bóng chữ* dưới) |
 | `layoutGroup` | `HorizontalLayoutGroup` / `VerticalLayoutGroup` / `GridLayoutGroup`: padding (`RectOffset`), childAlignment (`TextAnchor`), spacing, reverseArrangement, childControl/Scale/ForceExpand Width/Height; Grid: cellSize, `gridSpacing` → spacing, startCorner, startAxis, constraint, constraintCount |
 | `layoutElement` | `LayoutElement`: ignoreLayout, min/preferred/flexible Width/Height (-1 = không đặt), layoutPriority |
 | `contentSizeFitter` | `ContentSizeFitter`: horizontalFit, verticalFit (`FitMode` cùng tên) |
@@ -98,6 +104,25 @@ layout group/ContentSizeFitter điều khiển vẫn nhận đủ giá trị `re
 Sprite được chép vào thư mục sprite và đặt: Texture Type Sprite, Single, pivot giữa, Mesh Type Full Rect, mipmap tắt,
 Alpha Is Transparency, Pixels Per Unit = `canvas.referencePixelsPerUnit` (để viền 9-slice đúng kích thước như trên web),
 nén để mặc định của project. Tệp không đổi nội dung thì không import lại.
+
+## Viền, bóng chữ (material TMP)
+
+Importer gán `fontSharedMaterial` (không dùng `fontMaterial` vì nó tạo instance riêng từng chữ), sau khi đã gán font:
+
+1. Có `text.materialPreset`: tìm material tên đúng như vậy dùng được với font của chữ (`_MainTex` là atlas của font).
+   Tìm cả material mặc định của font, material là sub-asset trong font asset và material asset riêng
+   (`AssetDatabase.FindAssets("t:Material <tên>")`, so tên chính xác). Thấy thì gán, thông số viền/bóng trong file
+   chỉ để web vẽ. Không thấy (hoặc material trùng tên nhưng dùng atlas khác) thì cảnh báo rồi làm như bước 2.
+2. Không có preset mà thông số khác mặc định (`faceDilate` ≠ 0, `outline.width` > 0, hoặc có `underlay`): dùng preset
+   tự tạo trong **Thư mục material TMP**, tên `<tên font asset> ULS <8 hex>`. 8 hex là hash FNV-1a của GUID font asset
+   cùng bộ thông số đã làm tròn 4 chữ số, nên cùng font + cùng thông số luôn ra đúng một asset: mọi chữ dùng chung,
+   import lại không tạo trùng. Asset tạo bằng `new Material(font.material)`, đặt `_FaceDilate`, `_OutlineWidth`,
+   `_OutlineColor`, `_UnderlayColor`, `_UnderlayOffsetX/Y`, `_UnderlayDilate`, `_UnderlaySoftness`, bật/tắt keyword
+   `OUTLINE_ON`, `UNDERLAY_ON` (cần cho shader Mobile SDF; shader Distance Field cũng được đặt cho thống nhất) rồi
+   `ShaderUtilities.UpdateShaderRatios`. Asset đã có thì dùng lại nguyên trạng (dev chỉnh tay vẫn giữ).
+3. Không có gì: material mặc định của font (`font.material`).
+
+`fontInfo` ở cấp tài liệu chỉ dành cho web, importer bỏ qua.
 
 ## Dùng từ code
 

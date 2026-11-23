@@ -185,6 +185,34 @@ namespace UILayoutStudio.EditorTools
         public float characterSpacing;
         /// <summary>TMP_Text.margin: x = left, y = top, z = right, w = bottom.</summary>
         public Vector4 margin;
+
+        // Material TMP (viền, bóng). Xem docs/FORMAT.md "Viền, bóng chữ".
+        /// <summary>Tên material preset trong Unity, null = không có.</summary>
+        public string materialPreset;
+        /// <summary>_FaceDilate, -1..1.</summary>
+        public float faceDilate;
+        /// <summary>null = không viền.</summary>
+        public TextOutline outline;
+        /// <summary>null = không bóng.</summary>
+        public TextUnderlay underlay;
+        /// <summary>File có ít nhất một trong các trường materialPreset, faceDilate, outline, underlay.</summary>
+        public bool hasMaterialFields;
+
+        /// <summary>Thông số khác mặc định (cần material riêng thay cho material mặc định của font).</summary>
+        public bool HasNonDefaultMaterialParams =>
+            faceDilate != 0 || (outline != null && outline.width > 0) || underlay != null;
+    }
+
+    public sealed class TextOutline
+    {
+        public float width;
+        public Color color = Color.black;
+    }
+
+    public sealed class TextUnderlay
+    {
+        public Color color = new Color(0, 0, 0, 0.5f);
+        public float offsetX, offsetY, dilate, softness;
     }
 
     public sealed class LayoutNodeData
@@ -272,6 +300,22 @@ namespace UILayoutStudio.EditorTools
                     t.characterSpacing = J.Num(tx, "characterSpacing", 0);
                     if (J.Obj(tx, "margin") is Dictionary<string, object> mg)
                         t.margin = new Vector4(J.Num(mg, "left", 0), J.Num(mg, "top", 0), J.Num(mg, "right", 0), J.Num(mg, "bottom", 0));
+
+                    var preset = J.Str(tx, "materialPreset", null);
+                    t.materialPreset = string.IsNullOrWhiteSpace(preset) ? null : preset.Trim();
+                    t.faceDilate = J.Num(tx, "faceDilate", 0);
+                    if (J.Obj(tx, "outline") is Dictionary<string, object> ol)
+                        t.outline = new TextOutline { width = J.Num(ol, "width", 0), color = J.Col(ol, "color", Color.black) };
+                    if (J.Obj(tx, "underlay") is Dictionary<string, object> ul)
+                        t.underlay = new TextUnderlay
+                        {
+                            color = J.Col(ul, "color", new Color(0, 0, 0, 0.5f)),
+                            offsetX = J.Num(ul, "offsetX", 0),
+                            offsetY = J.Num(ul, "offsetY", 0),
+                            dilate = J.Num(ul, "dilate", 0),
+                            softness = J.Num(ul, "softness", 0),
+                        };
+                    t.hasMaterialFields = t.materialPreset != null || J.Get(tx, "faceDilate") is double || t.outline != null || t.underlay != null;
                 }
             }
 
